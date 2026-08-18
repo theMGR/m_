@@ -44,5 +44,24 @@ const onResizeSettled = debounce(
 );
 onResizeSettled({ w: 1024, h: 768 });
 
-// Ex 26.5: Immediate (Leading Edge) Debounce
-console.log("Ex 26.5 - Immediate fire: First click runs immediately");
+// Ex 26.5: Immediate (Leading Edge) Debounce Implementation
+function debounceLeading(func, delayMs, immediate = true) {
+  let timerId;
+  return function (...args) {
+    const callNow = immediate && !timerId;
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      timerId = null;
+      if (!immediate) func.apply(this, args);
+    }, delayMs);
+    if (callNow) func.apply(this, args);
+  };
+}
+const debouncedSubmitBtn = debounceLeading(
+  (msg) => console.log("Ex 26.5 - Immediate fire:", msg),
+  15,
+  true,
+);
+debouncedSubmitBtn("First click runs immediately");
+debouncedSubmitBtn("Second rapid click (silenced)");
+debouncedSubmitBtn("Third rapid click (silenced)");

@@ -29,18 +29,88 @@ const throttledLog = throttle(
 throttledLog("Call 1");
 throttledLog("Call 2 (Dropped)");
 
-// Ex 25.2: Scroll Position Tracker Simulation
+// Ex 25.2: Scroll Position Tracker Simulation (Throttling High-Frequency Scroll Events)
 const onScroll = throttle(
   (scrollY) => console.log("Ex 25.2 - Scrolled to Y:", scrollY),
   50,
 );
 onScroll(100);
+onScroll(150); // Dropped (within 50ms)
+onScroll(200); // Dropped (within 50ms)
 
-// Ex 25.3: Trailing Edge Throttle (Ensures final value is not lost)
-console.log("Ex 25.3 - Order submitted once");
+// Ex 25.3: Trailing Edge Throttle (Guarantees final invocation executes after cooldown)
+function throttleWithTrailing(func, limitMs) {
+  let timerId = null;
+  let lastRan = 0;
+  let lastArgs = null;
+  let lastThis = null;
 
-// Ex 25.4: Mouse Coordinate Tracker Simulation
-console.log("Ex 25.4 - Cursor at:", { x: 10, y: 20 });
+  return function (...args) {
+    const now = Date.now();
+    const remaining = limitMs - (now - lastRan);
 
-// Ex 25.5: Throttle Pass Verification
-console.log("Ex 25.5 - Timestamp throttle: Pass");
+    if (remaining <= 0) {
+      if (timerId) {
+        clearTimeout(timerId);
+        timerId = null;
+      }
+      lastRan = now;
+      func.apply(this, args);
+    } else {
+      lastArgs = args;
+      lastThis = this;
+      if (!timerId) {
+        timerId = setTimeout(() => {
+          lastRan = Date.now();
+          timerId = null;
+          func.apply(lastThis, lastArgs);
+        }, remaining);
+      }
+    }
+  };
+}
+const throttledOrder = throttleWithTrailing(
+  (orderId) => console.log("Ex 25.3 - Trailing throttle processed:", orderId),
+  20,
+);
+throttledOrder("Order #101 (Initial click)");
+throttledOrder("Order #102 (Final update)");
+
+// Ex 25.4: Mouse Coordinate Tracker Simulation (Batching high-frequency events)
+const trackMouseMove = throttle(
+  (coords) => console.log("Ex 25.4 - Cursor at:", coords),
+  50,
+);
+trackMouseMove({ x: 10, y: 20 });
+trackMouseMove({ x: 12, y: 24 }); // Dropped
+trackMouseMove({ x: 15, y: 30 }); // Dropped
+
+// Ex 25.5: rAF Throttle (Synchronized to Screen Refresh Rate) & Cancellation
+function throttleRAF(func) {
+  let isQueued = false;
+  let timerId = null;
+  const throttled = function (...args) {
+    if (isQueued) return;
+    isQueued = true;
+    const schedule =
+      typeof requestAnimationFrame === "function"
+        ? requestAnimationFrame
+        : (cb) => (timerId = setTimeout(cb, 16));
+    schedule(() => {
+      isQueued = false;
+      func.apply(this, args);
+    });
+  };
+  throttled.cancel = () => {
+    isQueued = false;
+    if (typeof cancelAnimationFrame === "function")
+      cancelAnimationFrame(timerId);
+    else clearTimeout(timerId);
+  };
+  return throttled;
+}
+const renderFrame = throttleRAF((frame) =>
+  console.log("Ex 25.5 - rAF Rendered Frame:", frame),
+);
+renderFrame("Frame #1");
+renderFrame("Frame #2 (Skipped in same frame tick)");

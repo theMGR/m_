@@ -6,6 +6,42 @@
  * V8 Engine Internals, Event Loop Concurrency, Closures, Scopes, Prototypes,
  * DOM/BOM Mock Engines, Async Patterns, and Senior/Staff Architect Interview Q&A.
  *
+ * TABLE OF CONTENTS:
+ *  1. let vs const vs var
+ *  2. undeclared vs undefined vs null vs defined
+ *  3. Global, Local, Functional, & Lexical Scope
+ *  4. Closure vs Hoisting
+ *  5. Arrow Functions vs Regular Functions
+ *  6. Array Methods: map, filter, reduce (reducer)
+ *  7. Callback Hell & Inversion of Control
+ *  8. Promises Lifecycle (Pending, Fulfilled, Rejected)
+ *  9. Promise Creation & Error Handling Strategies
+ * 10. Promise Combinators (all, allSettled, race, any)
+ * 11. Async / Await Mechanics & Internals
+ * 12. Higher-Order Functions (HOF)
+ * 13. Call Stack vs Microtask Queue vs Macrotask Queue
+ * 14. Event Loop & Single-Threaded Concurrency
+ * 15. Prototypal Inheritance & Prototype Chain
+ * 16. The "this" Keyword & 4 Binding Rules
+ * 17. call, apply, and bind
+ * 18. Rest Operator vs Spread Operator
+ * 19. Array & Object Structuring and Destructuring
+ * 20. Shallow Copy vs Deep Copy
+ * 21. DOM Manipulation (Selectors, Mutation, Fragments, Classes, Styles)
+ * 22. DOM vs BOM (Window, Location, Navigator, Storage, History, Screen)
+ * 23. Event Bubbling & Event Capturing (3-Phase Dispatcher Engine)
+ * 24. Event Delegation Pattern (Dynamic Elements & Closest Traversal)
+ * 25. Throttling (Rate Limiting Implementations)
+ * 26. Debouncing (Trailing, Leading, & Auto-Save Implementations)
+ * 27. Currying & Partial Application
+ * 28. Temporal Dead Zone (TDZ)
+ * 29. Equality: == vs === (Type Coercion & Object.is)
+ * 30. Synchronous vs Asynchronous Execution
+ * 31. V8 Engine Architecture (AST Lexer, Ignition Bytecode, TurboFan JIT, GC)
+ * 32. setInterval vs setTimeout
+ * 33. Fetch API (GET, POST, Error Handling, AbortController, Retry)
+ * ============================================================================
+ *
  * Each of the 33 topics includes:
  *  1. Architectural Overview & Recruiter / Examiner Definitions.
  *  2. Low-Level V8 Engine & Execution Context Mechanics.

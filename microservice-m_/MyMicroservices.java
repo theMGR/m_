@@ -7,6 +7,30 @@
  * Messaging, Event-Driven Design, Observability, and Interview Q&A from
  * Mid-Level to Staff / Principal Distributed Systems Architect level.
  *
+ * TABLE OF CONTENTS:
+ *  1. Monolith vs Microservices Architecture (Conway's Law & Bounded Contexts)
+ *  2. Database Sharding & Replication (Leader-Follower, Read Lag, Consistent Hashing)
+ *  3. CQRS (Command Query Responsibility Segregation & Event-Driven Projections)
+ *  4. Caching Strategies (Cache-Aside, Write-Through, Write-Behind, Stampede Locks)
+ *  5. Load Balancing (Client-Side vs Server-Side, Round Robin, Least Connections)
+ *  6. Asynchronous Processing (Worker Queues, Thread Pools, Reactive Backpressure)
+ *  7. Synchronous vs Asynchronous Communication (Latency Cascades & Dual-Write Bug)
+ *  8. Message Brokers (Apache Kafka Commit Log, Partitions, Offsets, Consumer Groups)
+ *  9. API Gateway Pattern (Edge Routing, JWT Token Relay, BFF, Aggregator)
+ * 10. Circuit Breakers (Resilience4j CLOSED/OPEN/HALF-OPEN State Machine)
+ * 11. Idempotency (Idempotency Keys, Redis SETNX De-duplication Store)
+ * 12. Distributed Transactions & Two-Phase Commit (2PC Coordinator & Blocking Flaws)
+ * 13. Saga Pattern (Choreography vs Orchestration & Compensating Transactions)
+ * 14. Distributed Authentication (Stateless JWT Verification, JWKS, mTLS)
+ * 15. Distributed Tracing (Trace ID, Span ID, W3C TraceContext, Baggage)
+ * 16. Centralized Logging (ELK Stack, Structured JSON, SLF4J MDC Trace ID)
+ * 17. Production Observability (Grafana, Prometheus, Zipkin, 4 Golden Signals)
+ * 18. Rate Limiter & Eureka Server (Token Bucket, Service Discovery, Heartbeats)
+ * 19. Kafka vs RabbitMQ (Distributed Stream Commit Log vs AMQP Message Broker)
+ * 20. Redis & Eviction Policies (LRU, LFU, Volatile-TTL, Sentinel vs Cluster)
+ * 21. 12 Core Design Patterns of Microservices (Catalog & Simulators)
+ * ============================================================================
+ *
  * Each topic includes:
  *  1. Architectural Overview & System Design Core Definitions.
  *  2. Internal Mechanics & Low-Level Distributed System Mechanics.

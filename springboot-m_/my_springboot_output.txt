@@ -48,14 +48,14 @@ Ex 6.1 - @Service is meta-annotated with @Component: true
 Ex 6.1 - @Repository is meta-annotated with @Component: true
 Ex 6.2 - @Repository exception translation: Spring DataAccessException: DataIntegrityViolationException
 Ex 6.3 - @RestController automatic JSON response body: {"status":"success","payload":"ProductList"}
-Ex 6.4 - Layered responsibilities: {@Controller / @RestController=Presentation / REST Endpoints, @Repository=Data Persistence & CRUD Operations, @Component=Utility, Helper, & Strategy Beans, @Service=Transaction & Business Logic}
+Ex 6.4 - Layered responsibilities: {@Service=Transaction & Business Logic, @Controller / @RestController=Presentation / REST Endpoints, @Repository=Data Persistence & CRUD Operations, @Component=Utility, Helper, & Strategy Beans}
 Ex 6.5 - @ComponentScan scans base package recursively for all @Component meta-annotated classes
 
 --- 7. SPRING VS SPRING BOOT ---
+Ex 7.1 - Deployment -> Spring: External WAR in Tomcat | Spring Boot: Embedded Server Executable JAR
 Ex 7.1 - Dependencies -> Spring: Manual version alignment | Spring Boot: Starter POMs with BOM
 Ex 7.1 - Monitoring -> Spring: Custom build | Spring Boot: Built-in Spring Boot Actuator
 Ex 7.1 - Configuration -> Spring: Manual XML/Java Config | Spring Boot: Auto-Configuration
-Ex 7.1 - Deployment -> Spring: External WAR in Tomcat | Spring Boot: Embedded Server Executable JAR
 Ex 7.2 - spring-boot-starter-web automatically imports: [spring-web, spring-webmvc, tomcat-embed-core, jackson-databind]
 Ex 7.3 - Embedded Tomcat 10.1 initialized on port: 8080 (Zero external WAR install)
 Ex 7.4 - Fat JAR layout: BOOT-INF/classes, BOOT-INF/lib (all dependencies), org/springframework/boot/loader/JarLauncher
@@ -94,7 +94,7 @@ Ex 11.4 - JPQL DTO Query: 'SELECT new com.app.dto.UserDTO(u.id, u.name) FROM Use
 Ex 11.5 - DTOs prevent @OneToMany infinite JSON recursion without needing @JsonManagedReference/@JsonBackReference
 
 --- 12. GLOBAL EXCEPTION HANDLING ---
-Ex 12.3 - @RestControllerAdvice structured 404 response: ErrorResponse[timestamp=2026-08-18T08:53:30.177983Z, status=404, error=Not Found, message=Product with ID 99 not found, path=/api/v1/products/99]
+Ex 12.3 - @RestControllerAdvice structured 404 response: ErrorResponse[timestamp=2026-08-18T09:04:15.005969Z, status=404, error=Not Found, message=Product with ID 99 not found, path=/api/v1/products/99]
 Ex 12.4 - Spring Boot 3 / Spring 6 ProblemDetail (RFC 7807): {status=404, type=https://api.example.com/errors/not-found, detail=Order #501 does not exist, title=Resource Not Found}
 Ex 12.5 - Bean validation error aggregation: {email=Must be valid format, age=Must be >= 18}
 
@@ -161,9 +161,9 @@ Ex 19.4 - Custom Starter pattern: my-feature-spring-boot-starter (dependencies) 
 Ex 19.5 - Start app with '--debug' or check '/actuator/conditions' to view full auto-configuration evaluation report
 
 --- 20. SPRING ACTUATOR ---
-Ex 20.1 - Custom HealthIndicator /actuator/health output: {details={latencyMs=4, database=PostgreSQL}, status=UP}
-Ex 20.2 - Kubernetes Probes: {livenessProbe=/actuator/health/liveness (Checks if app is alive or needs container restart), readinessProbe=/actuator/health/readiness (Checks if app is ready to accept HTTP traffic)}
-Ex 20.3 - /actuator/metrics telemetry: {jvm.memory.used.mb=516, http.server.requests.count=2}
+Ex 20.1 - Custom HealthIndicator /actuator/health output: {status=UP, details={latencyMs=4, database=PostgreSQL}}
+Ex 20.2 - Kubernetes Probes: {readinessProbe=/actuator/health/readiness (Checks if app is ready to accept HTTP traffic), livenessProbe=/actuator/health/liveness (Checks if app is alive or needs container restart)}
+Ex 20.3 - /actuator/metrics telemetry: {http.server.requests.count=2, jvm.memory.used.mb=516}
 Ex 20.4 - Exposure config: 'management.endpoints.web.exposure.include: health,metrics,prometheus'
 Ex 20.5 - /actuator/info output: {git.commit=a87fd1b, java.version=21, app.version=2.1.0}
 
@@ -186,13 +186,13 @@ Ex 23.1 - Generated Stateless JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIi
 Ex 23.1 - Verified JWT Signature: true
 Ex 23.2 - Symmetric (HS256): Same shared secret for Auth & Resource Server | Asymmetric (RS256): Private key signs, Public key verifies (JWKS)
 Ex 23.3 - OAuth2 Authorization Code Flow with PKCE: 3. Client exchanges Code + code_verifier for Access Token & ID Token
-Ex 23.4 - OAuth2 Core Roles: {Client=Frontend App (React/Angular/Mobile), Authorization Server=Issues Tokens (Keycloak / Auth0 / Okta), Resource Owner=The End User, Resource Server=Spring Boot REST API protecting data}
+Ex 23.4 - OAuth2 Core Roles: {Resource Server=Spring Boot REST API protecting data, Client=Frontend App (React/Angular/Mobile), Authorization Server=Issues Tokens (Keycloak / Auth0 / Okta), Resource Owner=The End User}
 Ex 23.5 - Spring Boot Resource Server config: 'spring.security.oauth2.resourceserver.jwt.issuer-uri=https://auth.example.com'
 
 --- 24. SPRING MVC REQUEST FLOW ---
 Ex 24.1 - End-to-End Spring MVC Flow: FilterChain -> DispatcherServlet -> HandlerMapping (Found /api/orders) -> Interceptor.preHandle() -> HandlerAdapter -> OrderController.getOrder() -> HttpMessageConverter (Jackson JSON) -> 200 OK Response
 Ex 24.2 - HandlerMapping: Identifies WHICH controller handles request | HandlerAdapter: Handles HOW to invoke it
-Ex 24.3 - HttpMessageConverter payload serialization: {"type":"Object","timestamp":"2026-08-18T08:53:30.224016Z"}
+Ex 24.3 - HttpMessageConverter payload serialization: {"type":"Object","timestamp":"2026-08-18T09:04:15.054469Z"}
 Ex 24.4 - ViewResolver resolves logical view name 'index' to '/templates/index.html' (Omitted in @RestController)
 Ex 24.5 - Spring MVC Async: Controller returns DeferredResult/CompletableFuture, freeing Tomcat thread during long operations
 

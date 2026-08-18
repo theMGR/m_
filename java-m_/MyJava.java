@@ -6,6 +6,50 @@
  * from Core OOP, JVM Internals, Concurrency, Collections, Modern Java 8-21 Features,
  * Functional Programming, to Virtual Threads.
  *
+ * TABLE OF CONTENTS:
+ *  1. 4 Pillars of OOP (Encapsulation, Abstraction, Inheritance, Polymorphism)
+ *  2. static vs final (Memory Allocation & Immutability)
+ *  3. Access Modifiers (public, protected, package-private, private)
+ *  4. Interface vs Abstract Class (Multiple Inheritance & Default Methods)
+ *  5. Class vs Abstract Class vs Interface (Architectural Decision Matrix)
+ *  6. Multithreading & Thread Lifecycle (6 Thread States)
+ *  7. throw vs throws (Explicit Throwing vs Checked Exception Signatures)
+ *  8. Runnable vs Callable (Return Values & Checked Exceptions)
+ *  9. Ways to Create a Thread (Thread, Runnable, Callable, Virtual Threads)
+ * 10. Thread Pool & ThreadPoolExecutor (Core Pool, Max Pool, WorkQueue)
+ * 11. ExecutorService (Task Submission, Future, graceful shutdown)
+ * 12. CompletableFuture vs Future (Non-blocking Pipelines & Async Chaining)
+ * 13. ForkJoinPool & Work-Stealing Algorithm
+ * 14. Fail-Fast vs Fail-Safe Iterators (ConcurrentModificationException)
+ * 15. Atomic vs Volatile (Visibility vs Atomicity, CAS Hardware Intrinsic)
+ * 16. synchronized vs Lock / ReentrantLock (Pessimistic Locking & Fairness)
+ * 17. Circular Dependencies in Java (Constructor vs Setter Injection & @Lazy)
+ * 18. Deadlock (4 Coffman Conditions, Detection, & Prevention)
+ * 19. Comparator vs Comparable (Natural vs Custom Ordering)
+ * 20. compareTo vs Comparator.comparing (Modern Functional Comparators)
+ * 21. Serialization vs Deserialization (serialVersionUID, transient)
+ * 22. String vs StringBuffer vs StringBuilder (Thread Safety & Mutability)
+ * 23. String Pool & String Interning (PermGen/Metaspace Heap Placement)
+ * 24. Java Exception Hierarchy (Throwable, Error, Checked vs Unchecked)
+ * 25. try-catch-finally & finalize (Cleaner API & try-with-resources)
+ * 26. Compile-Time (Checked) vs Run-Time (Unchecked) Exceptions
+ * 27. Custom Exceptions (Domain-Specific Business Exceptions)
+ * 28. Design Patterns (Factory, Singleton, Builder, Prototype, Observer)
+ * 29. JVM Memory Management (Heap, Stack, Metaspace, Native Memory)
+ * 30. Young Generation vs Old Generation (Generational Hypothesis)
+ * 31. Eden, Survivor 0 (S0), and Survivor 1 (S1) Space Mechanics
+ * 32. Heap vs Stack vs Metaspace (Memory Layout & Allocation)
+ * 33. Stop The World (STW) Pauses in Garbage Collection
+ * 34. How Garbage Collector Works (ZGC, G1GC, ParallelGC, CMS)
+ * 35. Memory Leaks, GC Full (OOM), and GC Tuning Flags
+ * 36. Constructors in Detail (Super/This Chaining, Copy Constructors)
+ * 37. Generics & Type Erasure (PECS: Producer Extends, Consumer Super)
+ * 38. Java Collections Framework (Hierarchy & Performance)
+ * 39. List vs Set vs Map (Internal Data Structures)
+ * 40. HashMap vs HashSet vs LinkedHashMap vs ConcurrentHashMap (Node, Treeify)
+ * 41. ArrayList vs LinkedList vs Primitive Array (Memory Cache Locality)
+ * ============================================================================
+ *
  * Each topic includes:
  *  1. Crisp Interview Definition (What an interviewer wants to hear).
  *  2. Internal Mechanics & JVM Architecture Notes.

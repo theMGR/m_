@@ -7,10 +7,10 @@
 Ex 1.1 - RDBMS (MySQL) Normalized Relational Row with Foreign Key: User 101 -> Order $250.0
 Ex 1.2 - Document NoSQL (MongoDB Hierarchical Embedded Document): {_id=obj_6619ef, name=Alice, addresses=[{city=New York, zip=10001}, {city=Austin, zip=73301}]}
 Ex 1.3 - Key-Value NoSQL (Redis Session Store): {user: 'Alice', role: 'ADMIN', ttl: 3600}
+Ex 1.4 - Transactions -> MySQL: ACID (Immediate) | NoSQL: BASE (Eventual Consistency)
 Ex 1.4 - Scaling -> MySQL: Vertical (Read Replicas) | NoSQL: Horizontal Distributed Sharding
 Ex 1.4 - Schema -> MySQL: Fixed/Strict DDL | NoSQL: Schema-less / Dynamic JSON
 Ex 1.4 - Data Model -> MySQL: Relational Tables | NoSQL: Document, Key-Value, Columnar, Graph
-Ex 1.4 - Transactions -> MySQL: ACID (Immediate) | NoSQL: BASE (Eventual Consistency)
 Ex 1.5 - Polyglot Persistence: Use MySQL for payments, Redis for caching, MongoDB for product catalog, Cassandra for audit logs
 
 --- 2. DATABASE TRANSACTIONS ---
@@ -29,10 +29,10 @@ Ex 2.5 - Local DB Transactions rely on ACID; Distributed transactions across dat
 Ex 3.1 - ACID Consistency Check: true
 Ex 3.2 - BASE Soft State (Replicas divergent during sync window): Consistent=false
 Ex 3.2 - BASE Eventual Consistency reached: Consistent=true (Replica=Value_V2)
+Ex 3.3 - Transactions -> ACID: Heavyweight two-phase locking | BASE: Lightweight Saga / compensation
 Ex 3.3 - Focus -> ACID: Data Accuracy & Financial Precision | BASE: High Availability & Low Latency
 Ex 3.3 - Schema -> ACID: Rigid relational schemas | BASE: Dynamic schema-less documents
 Ex 3.3 - Consistency -> ACID: Immediate / Linearizable | BASE: Eventual / Tunable Quorum
-Ex 3.3 - Transactions -> ACID: Heavyweight two-phase locking | BASE: Lightweight Saga / compensation
 Ex 3.4 - CAP Theorem: ACID databases are CP (Consistency + Partition Tolerance); BASE databases are AP (Availability + Partition Tolerance)
 Ex 3.5 - Tunable Consistency: Read/Write Quorum (W + R > N) turns an AP BASE database into a strongly consistent store
 
@@ -69,9 +69,9 @@ Ex 7.4 - Standard Query: 'SELECT dept, AVG(salary) FROM emp WHERE active=1 GROUP
 Ex 7.5 - Performance Tip: Always filter out rows in WHERE clause early to reduce the volume of rows fed into GROUP BY memory
 
 --- 8. DELETE VS DROP VS TRUNCATE ---
-Ex 8.1 - DROP -> DDL | Destroys table structure + data + metadata completely from DB catalog
 Ex 8.1 - DELETE -> DML | Can use WHERE | Slow (Row-by-row Undo logs) | Rollbackable | Fires Triggers | Retains Auto-Increment
 Ex 8.1 - TRUNCATE -> DDL | No WHERE clause | Ultra-Fast (Page deallocation) | Resets Auto-Increment to 1 | No Triggers
+Ex 8.1 - DROP -> DDL | Destroys table structure + data + metadata completely from DB catalog
 Ex 8.2 - DELETE with WHERE result: [Row_1, Row_3]
 Ex 8.3 - TRUNCATE wiped data & reset autoIncrement: size=0, nextId=1
 Ex 8.4 - DROP TABLE removed metadata definition from catalog: exists=false
@@ -148,10 +148,10 @@ Ex 17.1 - Optimistic User A Update (Success): true [New Version=2]
 Ex 17.1 - Optimistic User B Update (OptimisticLockException): false
   [PESSIMISTIC_LOCK] Buyer 1 acquired lock and bought last item!
 Ex 17.2 - Pessimistic Lock prevented overselling: Buyer 2 succeeded = false
+Ex 17.3 - Best For -> Optimistic: Read-heavy / Low conflict | Pessimistic: Flash sales / Money deduction
 Ex 17.3 - Performance -> Optimistic: High throughput (Zero lock wait) | Pessimistic: Blocks competing threads
 Ex 17.3 - Mechanism -> Optimistic: Version check on UPDATE | Pessimistic: DB row lock (SELECT FOR UPDATE)
 Ex 17.3 - Deadlock Risk -> Optimistic: Zero deadlock risk | Pessimistic: Risk of deadlocks if lock ordering differs
-Ex 17.3 - Best For -> Optimistic: Read-heavy / Low conflict | Pessimistic: Flash sales / Money deduction
 Ex 17.4 - Lock Modes: PESSIMISTIC_READ ('LOCK IN SHARE MODE') vs PESSIMISTIC_WRITE ('FOR UPDATE')
 Ex 17.5 - Spring Retry: Use @Retryable(retryFor = ObjectOptimisticLockingFailureException.class, maxAttempts = 3) to automatically retry optimistic updates
 

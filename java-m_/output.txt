@@ -22,7 +22,7 @@ Ex 3.1 - private member access via public method: true
 Ex 3.2 - default package-private visibility: PackageScopedService
 true
 Ex 3.4 - public API endpoint: HTTP 200 OK
-Ex 3.5 - Access matrix levels defined: [private, public, default, protected]
+Ex 3.5 - Access matrix levels defined: [default, protected, private, public]
 
 --- 4. INTERFACE VS ABSTRACT CLASS ---
 Ex 4.1 - Abstract class with state & constructor: Dev Alex
@@ -154,7 +154,7 @@ Ex 21.5 - Externalizable gives 100% manual control over stream via writeExternal
 Ex 22.1 - String immutability: Hello
 Ex 22.2 - StringBuilder mutable append: Start -> Step 1 -> Step 2
 Ex 22.3 - StringBuffer synchronized: Safe Threaded Buffer
-Ex 22.4 - StringBuilder 5000 appends took: 398 µs
+Ex 22.4 - StringBuilder 5000 appends took: 261 µs
 Ex 22.5 - StringBuilder insert & reverse: FED-CBA
 
 --- 23. STRING POOL ---
@@ -240,7 +240,7 @@ Ex 33.5 - Lambda closed over effectively final variable: 50
 Ex 34.1 - Predicate composition (6 is positive & even): true
 Ex 34.2 - Function chaining andThen: Length: 10
 Ex 34.3 - Consumer andThen executed: [Event_A, EVENT_A]
-Ex 34.4 - Supplier produced: 0.28483218272550603
+Ex 34.4 - Supplier produced: 0.15566925505480533
 Ex 34.5 - Primitive IntPredicate isAdult(21): true
 
 --- 35. STREAM API ---
@@ -253,7 +253,7 @@ Ex 35.5 - Collectors.partitioningBy start with A: [Alice, Anna]
 
 --- 36. OPTIONAL API ---
 Ex 36.1 - Optional creation: isPresent=true, isEmpty=true
-Ex 36.2 - orElse: 'Default Value' | orElseGet: 'Computed Default 2026-08-18T08:53:27.208659Z'
+Ex 36.2 - orElse: 'Default Value' | orElseGet: 'Computed Default 2026-08-18T09:04:12.027341Z'
 Ex 36.3 - Optional.map length: 12
 Ex 36.4 - ifPresentOrElse output: [Found: Direct Value]
 Ex 36.5 - Optional.stream() in Stream pipeline: [Alpha, Beta]

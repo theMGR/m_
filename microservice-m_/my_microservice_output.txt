@@ -19,7 +19,7 @@ Ex 2.4 - Read-Your-Own-Writes pattern: Route read requests from the user who jus
 Ex 2.5 - Cross-shard JOINs are anti-patterns in microservices; data must be pre-joined in DTO/CQRS views
 
 --- 3. CQRS (COMMAND QUERY RESPONSIBILITY SEGREGATION) ---
-Ex 3.3 - CQRS Denormalized Read View retrieved: {id=usr_77, contact=rob@example.com, displayName=Robert Architect, indexedAt=2026-08-18T08:53:31.531966Z}
+Ex 3.3 - CQRS Denormalized Read View retrieved: {displayName=Robert Architect, indexedAt=2026-08-18T09:04:16.369775Z, id=usr_77, contact=rob@example.com}
 Ex 3.4 - CQRS Eventual Consistency: Read DB is updated asynchronously within milliseconds via Kafka stream consumer
 Ex 3.5 - CQRS Trade-off: Do not use for simple CRUD apps; use when read/write scaling ratios or complex domain logic justify it
 
@@ -28,7 +28,7 @@ Ex 4.1 - 1st Call: [CACHE_MISS -> DB_FETCH] MacBook Pro M3
 Ex 4.1 - 2nd Call: [CACHE_HIT] MacBook Pro M3
 Ex 4.2 - Write-Through Cache written and retrieved: Gaming Monitor
 Ex 4.3 - Stampede protected cache value: Black Friday 50% Off
-Ex 4.4 - TTL with Random Jitter calculated: 3691s (Prevents synchronized key expiration)
+Ex 4.4 - TTL with Random Jitter calculated: 3861s (Prevents synchronized key expiration)
 Ex 4.5 - Bloom Filter: Fast probabilistic check before querying cache/DB to reject non-existent keys
 
 --- 5. LOAD BALANCING ---
@@ -48,8 +48,8 @@ Ex 6.5 - Reactive Streams Backpressure: Consumer signals demand (request(N)) to 
 Ex 6.3 - @Async task executed on dedicated worker thread: pool-1-thread-1
 Ex 7.1 - Synchronous Chain: Total Latency = 240ms (Coupled availability)
 Ex 7.2 - Asynchronous Publish: Immediate return; Consumer processes when ready
-Ex 7.3 - Synchronous (REST/gRPC) -> Immediate consistency | High coupling | Cascading failure risk
 Ex 7.3 - Asynchronous (Kafka/RabbitMQ) -> Eventual consistency | Loose temporal coupling | Resilient buffering
+Ex 7.3 - Synchronous (REST/gRPC) -> Immediate consistency | High coupling | Cascading failure risk
 Ex 7.4 - Dual-Write Pitfall: Saving to DB and publishing to Kafka without Transactional Outbox risks data inconsistency
 Ex 7.5 - Use Sync for real-time user query reads; Use Async for state mutations, notifications, and cross-service updates
 
@@ -64,7 +64,7 @@ Ex 8.5 - Log Compaction keeps only the latest value for each key, enabling Kafka
 Ex 9.1 - API Gateway routed '/api/v1/orders/101' ➔ lb://order-service
 Ex 9.2 - Edge Auth passed & enriched downstream headers: {X-User-Roles=ROLE_PREMIUM, X-User-Id=usr_882}
 Ex 9.3 - BFF Pattern: Dedicated Mobile Gateway (/mobile/api) and Web Gateway (/web/api) tailored to client device payloads
-Ex 9.4 - API Gateway aggregated composite response: {recentOrders=[ORD-1, ORD-2], user=Alice}
+Ex 9.4 - API Gateway aggregated composite response: {user=Alice, recentOrders=[ORD-1, ORD-2]}
 Ex 9.5 - Rate Limiting at Gateway returns HTTP 429 Too Many Requests before requests touch downstream microservices
 
 --- 10. CIRCUIT BREAKERS (RESILIENCE4J) ---
@@ -76,8 +76,8 @@ Ex 10.4 - Bulkhead Isolation limits concurrent calls per downstream service to p
 Ex 10.5 - RateLimiter protects self from being overloaded; CircuitBreaker protects downstream services from overload
 
 --- 11. IDEMPOTENCY ---
-Ex 11.1 - 1st Attempt: [NEW_TRANSACTION] Paid $100.0 (TxId: TXN_b12565c0)
-Ex 11.1 - 2nd Retry (Network timeout retry): [CACHED_IDEMPOTENT_RESPONSE] Transaction already processed: Paid $100.0 (TxId: TXN_b12565c0)
+Ex 11.1 - 1st Attempt: [NEW_TRANSACTION] Paid $100.0 (TxId: TXN_24c76668)
+Ex 11.1 - 2nd Retry (Network timeout retry): [CACHED_IDEMPOTENT_RESPONSE] Transaction already processed: Paid $100.0 (TxId: TXN_24c76668)
 Ex 11.2 - DB Unique Constraint: 'UNIQUE INDEX (order_id, payment_ref)' guarantees duplicate DB writes throw duplicate key exception
 Ex 11.3 - Natural Idempotency: 'status = PAID' is idempotent; 'balance += 10' is non-idempotent
 Ex 11.4 - Kafka Consumer Idempotency: Store processed message offset/ID in DB table within same local transaction
@@ -100,30 +100,30 @@ Ex 13.1 - Saga Execution with Inventory Failure:
   [Saga Compensation 2] PaymentService: Refunded $100 (Compensating TX)
   [Saga Compensation 1] OrderService: Order CANCELLED (Compensating TX)
 Ex 13.1 - Saga Result: COMPENSATED_ROLLBACK
-Ex 13.2 - Saga.Choreography -> Event-driven pub/sub (Services listen & react to Kafka events)
 Ex 13.2 - Saga.Orchestration -> Central state machine commands services and coordinates compensations
+Ex 13.2 - Saga.Choreography -> Event-driven pub/sub (Services listen & react to Kafka events)
 Ex 13.3 - Outbox Pattern: Save Order + OutboxEvent in SAME local DB transaction; Debezium CDC publishes event to Kafka
 Ex 13.4 - Compensating transactions perform business semantic rollback (Refund money, restock item), not DB log undo
 Ex 13.5 - Pivot Transaction: The point of no return. Once Pivot succeeds, subsequent Saga steps must retry until success
 
 --- 14. DISTRIBUTED AUTHENTICATION ---
 Ex 14.1 - Microservice verified JWT locally with zero network auth calls: true
-Ex 14.2 - Token Relay headers propagated downstream: [X-Authenticated-User, Authorization, X-User-Roles]
+Ex 14.2 - Token Relay headers propagated downstream: [X-User-Roles, X-Authenticated-User, Authorization]
 Ex 14.3 - Instant Token Revocation check (Redis blacklist): true
 Ex 14.4 - Scopes (read:orders) define client permissions; Roles (ROLE_ADMIN) define user privileges
 Ex 14.5 - Service Mesh (Istio) enforces mTLS: Both client and server authenticate each other via X.509 certificates
 
 --- 15. DISTRIBUTED TRACING ---
 Ex 15.1 - Root Trace ID across all services: trace-root-9918
-Ex 15.1 - OrderService Span: id=1cdd040b, parent=span-gw-1
-Ex 15.1 - PaymentService Span: id=fe75f2a0, parent=1cdd040b
-Ex 15.2 - W3C 'traceparent' header propagated in HTTP requests: 00-trace-root-9918-fe75f2a0-01
+Ex 15.1 - OrderService Span: id=468fa581, parent=span-gw-1
+Ex 15.1 - PaymentService Span: id=c6422990, parent=468fa581
+Ex 15.2 - W3C 'traceparent' header propagated in HTTP requests: 00-trace-root-9918-c6422990-01
 Ex 15.3 - Spring Boot 3 uses Micrometer Tracing with OpenTelemetry / Brave bridge to export traces to Zipkin / Jaeger
 Ex 15.4 - Baggage metadata propagated across all service hops: {tenantId=enterprise_corp_12}
 Ex 15.5 - Sampling: In high-scale systems (100k req/s), sample 1-5% of traces to prevent storage exhaustion
 
 --- 16. CENTRALIZED LOGGING (ELK STACK) ---
-Ex 16.1 - Structured JSON Log formatted for Logstash: JsonLogEntry[timestamp=2026-08-18T08:53:31.624534Z, level=ERROR, service=payment-service, traceId=trace-root-9918, message=Payment gateway timeout after 5000ms, context={orderId=ORD-99, userId=usr_101}]
+Ex 16.1 - Structured JSON Log formatted for Logstash: JsonLogEntry[timestamp=2026-08-18T09:04:16.461202Z, level=ERROR, service=payment-service, traceId=trace-root-9918, message=Payment gateway timeout after 5000ms, context={userId=usr_101, orderId=ORD-99}]
 Ex 16.2 - MDC Enriched Log Output: [{traceId=trace-root-9918, userId=usr_101}] Order processed successfully
 Ex 16.3 - Log Pipeline: Filebeat reads container stdout ➔ Logstash parses JSON ➔ Elasticsearch indexes ➔ Kibana displays
 Ex 16.4 - Elasticsearch Index Lifecycle Management (ILM): Hot (SSD 7 days) -> Warm (HDD 30 days) -> Cold/Delete
@@ -150,11 +150,11 @@ Ex 18.4 - Distributed Rate Limiting: Redis executes atomic Lua scripts to manage
 Ex 18.5 - Cloud Native: Kubernetes CoreDNS ('http://order-service:8080') replaces Eureka in containerized K8s clusters
 
 --- 19. KAFKA VS RABBITMQ ---
-Ex 19.1 - Architecture -> Kafka: Distributed Commit Log | RabbitMQ: AMQP Message Queue
-Ex 19.1 - Persistence & Replay -> Kafka: Retains data on disk (Replayable) | RabbitMQ: Deletes after ACK
 Ex 19.1 - Routing -> Kafka: Key-to-partition hashing | RabbitMQ: Complex Exchange Bindings (Direct/Topic/Fanout)
 Ex 19.1 - Model -> Kafka: Pull-based (Consumer controls rate) | RabbitMQ: Push-based
 Ex 19.1 - Throughput -> Kafka: Millions/sec (Zero-Copy) | RabbitMQ: Tens of thousands/sec
+Ex 19.1 - Architecture -> Kafka: Distributed Commit Log | RabbitMQ: AMQP Message Queue
+Ex 19.1 - Persistence & Replay -> Kafka: Retains data on disk (Replayable) | RabbitMQ: Deletes after ACK
 Ex 19.2 - RabbitMQ Topic Exchange routed 'order.created' to: [order_queue, audit_queue]
 Ex 19.3 - Kafka Consumer rewound offset to 1: [Event 1, Event 2, Event 3]
 Ex 19.4 - Dead Letter Queue: Failed poisoned messages routed to DLQ after 3 failed retries with exponential backoff
@@ -163,10 +163,10 @@ Ex 19.5 - Rule: Choose RabbitMQ for complex AMQP routing & RPC; Choose Kafka for
 --- 20. REDIS & EVICTION POLICIES ---
 Ex 20.1 - Redis 'allkeys-lru' cache keys after eviction: [k3, k1, k4]
 Ex 20.2 - Redis 'allkeys-lfu' identified eviction candidate: rare_key
-Ex 20.3 - maxmemory-policy.allkeys-lfu -> Evicts least frequently used keys (Protects frequently accessed keys)
-Ex 20.3 - maxmemory-policy.noeviction -> Returns error on write commands when memory is full
 Ex 20.3 - maxmemory-policy.allkeys-lru -> Evicts least recently used keys (Standard caching recommendation)
 Ex 20.3 - maxmemory-policy.volatile-ttl -> Evicts keys with the shortest remaining TTL first
+Ex 20.3 - maxmemory-policy.allkeys-lfu -> Evicts least frequently used keys (Protects frequently accessed keys)
+Ex 20.3 - maxmemory-policy.noeviction -> Returns error on write commands when memory is full
 Ex 20.4 - Redis Sentinel: Automatic master failover (1 Master + Replicas) | Redis Cluster: Distributed sharding across 16,384 hash slots
 Ex 20.5 - Redis Data Types: String (Caching), Hash (Objects), List (Queues), Set (Unique tags), Sorted Set / ZSET (Leaderboards)
 
@@ -183,7 +183,7 @@ Ex 21.1 - 9. Bulkhead Pattern (Thread pool and CPU isolation per dependency)
 Ex 21.1 - 10. Sidecar Pattern (Envoy Service Mesh proxy in Kubernetes pods)
 Ex 21.1 - 11. Externalized Configuration Pattern (Spring Cloud Config / Vault)
 Ex 21.1 - 12. Service Discovery Pattern (Dynamic registration via Eureka / Consul)
-Ex 21.2 - Aggregator Pattern output: {balance=1500.0, activeTickets=[TCK-101], user=Alice}
+Ex 21.2 - Aggregator Pattern output: {activeTickets=[TCK-101], user=Alice, balance=1500.0}
 Ex 21.3 - Event Sourcing Reconstructed Balance from Event Log: $350
 Ex 21.4 - Bulkhead Isolation: Payment pool failure does NOT exhaust Search pool capacity
 Ex 21.5 - Sidecar Architecture: Container A (Spring Boot App) + Container B (Envoy Proxy for mTLS & tracing) in same Pod

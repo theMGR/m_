@@ -6,6 +6,33 @@
  * architecture, internal mechanics, and interview Q&A from Junior to Staff/Principal
  * Architect level.
  *
+ * TABLE OF CONTENTS:
+ *  1. Spring Bean Lifecycle (BeanDefinition, BFPP, BPP, Aware, InitializingBean)
+ *  2. @Transactional & Transaction Management (AOP Proxy, Self-Invocation Trap)
+ *  3. Autowired vs Constructor vs Field Injection (@Qualifier vs @Primary)
+ *  4. @RequestMapping vs @GetMapping (Composed Mappings, PathPatternParser)
+ *  5. @RequestParam vs @PathVariable (@Valid RequestBody & Constraints)
+ *  6. @Component vs @Service vs @Repository vs @Controller vs @RestController
+ *  7. Difference Between Spring and Spring Boot (Starter POMs, Auto-Config)
+ *  8. @SpringBootApplication Internals (@SpringBootConfiguration, @ComponentScan)
+ *  9. Dependency Injection vs Inversion of Control (BeanFactory vs ApplicationContext)
+ * 10. Hibernate vs JPA (Entity Lifecycle States, L1 Cache, Dirty Checking)
+ * 11. Entity vs DTO (Preventing Over-Posting, MapStruct, Projections)
+ * 12. Global Exception Handling (@RestControllerAdvice, RFC 7807 ProblemDetail)
+ * 13. How to Create a REST API (Layered Architecture, 201 Created, HATEOAS)
+ * 14. REST HTTP Protocols & Status Codes (Idempotency, 401 vs 403, 409, OPTIONS)
+ * 15. Difference Between PUT and PATCH (Full Replacement vs Delta Patch)
+ * 16. Transaction Lifecycle, Propagation & Isolation (REQUIRED, REQUIRES_NEW)
+ * 17. Spring Profiles (@Profile, application-{profile}.yml, Multi-document YAML)
+ * 18. N+1 Query Problem (Root Cause, JOIN FETCH, @EntityGraph, @BatchSize, DTOs)
+ * 19. @EnableAutoConfiguration vs @AutoConfiguration (Spring Boot 2 vs 3)
+ * 20. Spring Boot Actuator (Health, Metrics, Prometheus, K8s Probes)
+ * 21. Spring Security (SecurityFilterChain, AuthenticationManager, BCrypt)
+ * 22. Filter vs Interceptor vs SecurityContextHolder (Execution Pipeline, MDC)
+ * 23. JWT vs OAuth2 / OIDC (Stateless Tokens, PKCE, Resource Server)
+ * 24. Spring MVC Request Flow (DispatcherServlet, HandlerMapping, Converters)
+ * ============================================================================
+ *
  * Each topic includes:
  *  1. Architectural Overview & Recruiter/Examiner Definition.
  *  2. Internal Mechanics & JVM / Framework Engine Deep-Dive.

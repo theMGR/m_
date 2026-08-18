@@ -132,7 +132,7 @@ Ex 19.5 - Function parameter destructuring: Header: Dashboard (800px, sticky: fa
 Ex 20.1 - Shallow copy mutation affected original: true
 Ex 20.2 - structuredClone deep copy isolated: original = 60 | clone = 100
 Ex 20.3 - Cloned Set size: 3 | Original Set size: 2
-Ex 20.4 - JSON clone limitations (Date becomes string, nan becomes null): { date: '2026-08-18T08:53:31.773Z', nanVal: null }
+Ex 20.4 - JSON clone limitations (Date becomes string, nan becomes null): { date: '2026-08-18T09:04:16.599Z', nanVal: null }
 Ex 20.5 - Custom recursive deep clone verified: Cloud Infrastructure
 
 --- 21. DOM MANIPULATION ---
@@ -279,7 +279,7 @@ Ex 9.3 - Downstream recovered flow: Recovered default value
 Ex 33.1 - GET request result: { id: 1, title: 'Book' }
 Ex 33.3 - POST response: { success: true, received: { title: 'New Article', author: 'Dev' } }
 Ex 13.1 - [4. Macrotask] setTimeout
-Ex 14.3 - setTimeout(0) actual delay elapsed: 7ms
+Ex 14.3 - setTimeout(0) actual delay elapsed: 8ms
 Ex 7.5 - Parallel execution: { t1: 'Task 1', t2: 'Task 2', t3: 'Task 3' }
 Ex 13.2 - [Macrotask 1] Running
 Ex 13.2 - [Microtask inside Macrotask 1] Executed immediately after Macrotask 1
@@ -288,10 +288,10 @@ Ex 5.2 - Arrow in setTimeout preserves 'this': Timer Widget
 Ex 8.1 - State: FULFILLED, Value: SUCCESS_DATA
 Ex 8.2 - State: REJECTED, Reason: NETWORK_TIMEOUT
 Ex 10.3 - Promise.race winner: Fast (10ms)
+Ex 14.2 - Chunked processing finished without UI lock
 Ex 11.2 - Parallel await results: { res1: 'Parallel Result 1', res2: 'Parallel Result 2' }
 Ex 13.5 - Trampolined loop yielded to Event Loop
 Ex 14.1 - I/O Read [FileA] completed in 10ms
-Ex 14.2 - Chunked processing finished without UI lock
 Ex 10.1 - Promise.all failed fast with: Fail (15ms)
 Ex 10.2 - Promise.allSettled statuses: [ 'fulfilled', 'rejected' ]
 Ex 30.2 - [Async] Timer fired

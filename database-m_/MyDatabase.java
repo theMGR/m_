@@ -8,6 +8,26 @@
  * Window Functions (2nd Highest Salary), Multi-table JOINs, Normalization (1NF-BCNF),
  * and Concurrency Locking (Optimistic vs Pessimistic).
  *
+ * TABLE OF CONTENTS:
+ *  1. What is MySQL (RDBMS) vs NoSQL
+ *  2. Database Transactions (START TRANSACTION, COMMIT, ROLLBACK, SAVEPOINT)
+ *  3. ACID vs BASE (Strong Consistency vs Eventual Consistency)
+ *  4. Database Indexing (B+Tree, Hash Index, LSM-Tree, Covering Index)
+ *  5. Database Partitioning (Range, List, Hash Partition Pruning)
+ *  6. Database Sharding (Horizontal Scaling, Shard Keys, Consistent Hashing)
+ *  7. Difference Between WHERE and HAVING (Execution Order & Filtering)
+ *  8. DELETE vs DROP vs TRUNCATE (DML vs DDL, Rollback, Page Deallocations)
+ *  9. GROUP BY & CASE WHEN (Conditional Pivot Aggregations)
+ * 10. Aggregate Functions (MIN, MAX, COUNT, SUM, AVG & NULL Handling)
+ * 11. Database Normalization (Eliminating Update, Insert, Delete Anomalies)
+ * 12. Normal Forms (1NF, 2NF, 3NF, BCNF Deep-Dive)
+ * 13. Lazy Loading vs Eager Loading (N+1 Query & LazyInitializationException)
+ * 14. SQL JOINs (INNER, LEFT, RIGHT, FULL, SELF, CROSS & Join Algorithms)
+ * 15. Find 2nd Highest Salary (MAX Subquery, LIMIT OFFSET, DENSE_RANK)
+ * 16. JOIN Between 3 Tables (Execution Plans & Foreign Key Indexing)
+ * 17. Optimistic vs Pessimistic Locking (@Version vs SELECT ... FOR UPDATE)
+ * ============================================================================
+ *
  * Each topic includes:
  *  1. Architectural Overview & Recruiter/Examiner Definition.
  *  2. Low-Level Database Engine Internals (Buffer Pool, WAL, B+Tree, Undo Logs).

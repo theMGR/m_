@@ -1,0 +1,41 @@
+Monolith vs Microservices
+
+Database Sharding and Replication
+
+CQRS
+
+Caching Strategies
+
+Load Balancing
+
+Asynchronous Processing
+
+Synchronous vs Asynchronous
+
+Message Brokers kafka
+
+API Gateway Pattern
+
+Circuit Breakers
+
+Idempotency
+
+distributed transactions and two phase commit
+
+Saga Pattern
+
+Distributed Authentication
+
+Distributed Tracing
+
+Centralized Logging ELK
+
+Production Issues grafana zipkin
+
+Rate limiter Euraka Server
+
+diff b/w kafka vs rabitmQ
+
+Redis and it's eviction policies
+
+12 design pattern of microservices

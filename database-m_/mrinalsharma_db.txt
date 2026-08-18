@@ -1,0 +1,33 @@
+what is mySql and NoSQL
+
+transaction
+
+ACID vs BASE
+
+indexing
+
+particning
+
+sarding
+
+diff b/w where and having
+
+delete vs drop vs truncate
+
+groupeBy, SwitchCase
+
+aggegrate function like min max count
+
+normilization
+
+1NF, 2NF, 3NF , BCNF
+
+lazy loading and eager loding
+
+join, left,right,full,self
+
+find 2nd highest sallary
+
+joing b/w 3 tables
+
+optimistic and pessimistic locking

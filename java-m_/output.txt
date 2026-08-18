@@ -1,0 +1,298 @@
+==================================================================
+🚀 JAVA 21 MASTER REFERENCE & INTERVIEW NOTES (41 TOPICS)
+==================================================================
+
+
+--- 1. 4 PILLARS OF OOPS ---
+Ex 1.1 - Encapsulation (Validated Balance): $650.0
+Ex 1.2 - Inheritance: Vehicle brand: Tesla, Battery: 82kWh
+Ex 1.3 - Compile-time Polymorphism (Overloading): 5, 6.0, 6
+Ex 1.4 - Runtime Polymorphism (Dynamic dispatch areas): [12.57, 12.0]
+Ex 1.5 - Abstraction (Template Method): Processed $100.0 via Stripe Gateway
+
+--- 2. STATIC VS FINAL ---
+Ex 2.1 - static shared count: 3
+Ex 2.2 - static utility method clamp(150, 0, 100): 100
+Ex 2.3 - final reference mutation allowed: [Element 1]
+Ex 2.4 - final class instance: (10, 20)
+Ex 2.5 - static final constant: MyJavaEnterprise [Max=500]
+
+--- 3. ACCESS MODIFIERS ---
+Ex 3.1 - private member access via public method: true
+Ex 3.2 - default package-private visibility: PackageScopedService
+true
+Ex 3.4 - public API endpoint: HTTP 200 OK
+Ex 3.5 - Access matrix levels defined: [private, public, default, protected]
+
+--- 4. INTERFACE VS ABSTRACT CLASS ---
+Ex 4.1 - Abstract class with state & constructor: Dev Alex
+Ex 4.2 - Interface multiple inheritance: Printing document & Auditing log
+Ex 4.3 - Interface static: 3.14159, default: 25.0
+Ex 4.4 - Interface private helper: [INFO] System healthy
+Ex 4.5 - Diamond problem resolution: Left-Right
+
+--- 5. CLASS VS ABSTRACT VS INTERFACE ---
+Ex 5.1 - Concrete Class instance: Concrete execution
+Ex 5.2 - Abstract Class provides blueprint structure
+Ex 5.3 - Interface implemented as Lambda: true
+Ex 5.4 - Hybrid hierarchy: Order ID: 100 audited
+Ex 5.5 - Pattern matching instanceof: length=13
+
+--- 6. MULTITHREADING ---
+Ex 6.1 - Thread created & finished: Worker-Thread-1
+Ex 6.2 - State after instantiation: NEW
+Ex 6.2 - State after start: RUNNABLE
+Ex 6.2 - State after completion: TERMINATED
+Ex 6.3 - join() coordinated order: [Step 1, Step 2]
+Ex 6.4 - Thread cleanly stopped upon interrupt flag
+Ex 6.5 - wait/notify consumer received: Data-Payload-101
+
+--- 7. THROW VS THROWS ---
+Ex 7.1 - 'throw' caught: Age cannot be negative: -5
+Ex 7.2 - 'throws' in method signature caught: Invalid file path
+Ex 7.3 - Re-thrown exception with cause: Inner null error
+Ex 7.4 - Fast-fail validator returned: Valid Data
+Ex 7.5 - Checked wrapped in RuntimeException: Unchecked translation
+
+--- 8. RUNNABLE VS CALLABLE ---
+Ex 8.1 - Runnable executed (no return value)
+Ex 8.2 - Callable direct call returned: 84
+Ex 8.3 - FutureTask.get(): FutureTask Result
+Ex 8.4 - Runnable Future.get(): null | Callable Future.get(): Callable in Executor
+Ex 8.5 - Callable exception wrapped in ExecutionException: IOException
+
+--- 9. WAYS TO CREATE A THREAD ---
+Ex 9.1 - Way 1: Extends Thread
+Ex 9.2 - Way 2: Implements Runnable
+Ex 9.3 - Way 3: Callable + FutureTask
+Ex 9.4 - Way 4: Thread with Lambda syntax (Lambda-Thread)
+Ex 9.5 - Way 5: Virtual Thread (isVirtual=true)
+
+--- 10. THREAD POOL ---
+Ex 10.1 - FixedThreadPool results: [10, 20, 30]
+Ex 10.2 - CachedThreadPool Task Executed
+Ex 10.3 - SingleThreadExecutor sequential order: [1, 2, 3]
+Ex 10.4 - ScheduledExecutor: Scheduled Task Done
+Ex 10.5 - WorkStealingPool finished
+
+--- 11. EXECUTORSERVICES ---
+Ex 11.1 - submit() with Future return
+Ex 11.2 - invokeAll() results: [Task 1, Task 2, Task 3]
+Ex 11.3 - invokeAny() winner: Fast Winner
+Ex 11.4 - Graceful shutdown terminated cleanly: true
+Ex 11.5 - Custom ThreadPoolExecutor active: PoolSize=1
+
+--- 12. COMPLETABLE FUTURE VS FUTURE ---
+Ex 12.1 - CompletableFuture fluent pipeline: HELLO WORLD
+Ex 12.2 - thenCompose result: Profile for User_101
+Ex 12.3 - thenCombine calculated total: $108.0
+Ex 12.4 - allOf completed for: Service A & Service B
+Ex 12.5 - exceptionally() recovery: Fallback Cached Data (java.lang.RuntimeException: API Down)
+
+--- 13. FORKJOINPOOL ---
+Ex 13.1 - RecursiveTask parallel array sum: 5000
+Ex 13.2 - RecursiveAction in-place transform: [11, 12, 13, 14, 15]
+Ex 13.3 - CommonPool parallelism: 7
+Ex 13.4 - ForkJoinPool active thread count: 0
+Ex 13.5 - ForkJoinPool shutdown complete: true
+
+--- 14. FAIL-SAFE VS FAIL-FAST ---
+Ex 14.2 - Iterator.remove() safe list result: [A, C]
+Ex 14.3 - Fail-Safe CopyOnWriteArrayList modified successfully: [X, Y, Z, W]
+Ex 14.4 - Fail-Safe ConcurrentHashMap iteration keys: [k1, k2, k3]
+Ex 14.5 - Fail-fast checks internal 'modCount != expectedModCount' on each next() step
+
+--- 15. ATOMIC VS VOLATILE ---
+Ex 15.1 - volatile flag visibility stopped background thread
+Ex 15.2 - volatile guarantees Visibility, NOT Atomicity for compound operations
+Ex 15.3 - AtomicInteger thread-safe total: 1000
+Ex 15.4 - AtomicReference CAS update (true): RUNNING
+Ex 15.5 - LongAdder sum: 51
+
+--- 16. SYNCHRONIZED VS LOCK ---
+Ex 16.1 - synchronized method count: 1
+Ex 16.2 - ReentrantLock acquired and released
+Ex 16.3 - tryLock acquired successfully with timeout
+Ex 16.4 - ReentrantReadWriteLock readLock acquired
+Ex 16.5 - StampedLock optimistic read validated with zero lock contention
+
+--- 17. CIRCULAR DEPENDENCIES ---
+Ex 17.1 - Circular Dependency: ClassA needs ClassB in constructor, ClassB needs ClassA
+Ex 17.2 - Setter injection resolved circular reference: true
+Ex 17.3 - Lazy Supplier<T> resolution: Lazy Service B Instance
+Ex 17.4 - Mediator event received: A_COMPLETED
+Ex 17.5 - Architectural fix: Extract shared logic into a common ServiceC (Dependency Inversion)
+
+--- 18. DEADLOCK ---
+Ex 18.1 - 4 Coffman Conditions required for Deadlock
+Ex 18.2 - Lock ordering prevented deadlock
+Ex 18.3 - tryLock avoided potential deadlock: true
+Ex 18.4 - Deadlock detector check: 0 Deadlocks Found
+Ex 18.5 - Prefer high-level Concurrent data structures over nested synchronized blocks
+
+--- 19. COMPARATOR VS COMPARABLE ---
+Ex 19.1 - Comparable natural sort by ID: [Alice(101), Bob(102), Charlie(103)]
+Ex 19.2 - Comparator sort by Name: [Alice(101), Bob(102), Charlie(103)]
+Ex 19.3 - Reversed Comparator sort: [Charlie(103), Bob(102), Alice(101)]
+Ex 19.4 - Chained Comparator (Name -> ID): [Alice(100), Alice(200), Bob(150)]
+Ex 19.5 - nullsFirst sorting: [null, Alpha, Beta]
+
+--- 20. COMPARETO VS COMPARING ---
+Ex 20.1 - 'A'.compareTo('B'): -1 | Integer.compare(5, 5): 0
+Ex 20.2 - Comparator.comparing(Product::getTitle): Laptop
+Ex 20.3 - comparingDouble(Product::getPrice): cheapest is Mouse
+Ex 20.4 - Case-insensitive comparing: [Apple, banana, cherry]
+Ex 20.5 - Complex compound comparator created: true
+
+--- 21. SERIALIZATION VS DESERIALIZATION ---
+Ex 21.2 - Object serialized to byte stream (bytes=85)
+Ex 21.3 - Deserialized: username=admin_user, transient sessionSecret=null (omitted!)
+Ex 21.4 - Custom writeObject/readObject restored pass: Secret123
+Ex 21.5 - Externalizable gives 100% manual control over stream via writeExternal/readExternal
+
+--- 22. STRING, STRINGBUFFER, STRINGBUILDER ---
+Ex 22.1 - String immutability: Hello
+Ex 22.2 - StringBuilder mutable append: Start -> Step 1 -> Step 2
+Ex 22.3 - StringBuffer synchronized: Safe Threaded Buffer
+Ex 22.4 - StringBuilder 5000 appends took: 398 µs
+Ex 22.5 - StringBuilder insert & reverse: FED-CBA
+
+--- 23. STRING POOL ---
+Ex 23.1 - s1 == s2 (Pool reference): true
+Ex 23.1 - s1 == s3 (Heap reference): false
+Ex 23.1 - s1.equals(s3) (Content value): true
+Ex 23.2 - s1 == s3.intern(): true
+Ex 23.3 - Constant folded literal 'Hel' + 'lo' == 'Hello': true
+Ex 23.4 - Runtime concatenated string == 'Hello': false
+Ex 23.5 - G1GC JVM flag '-XX:+UseStringDeduplication' shares underlying byte[] arrays automatically
+
+--- 24. EXCEPTION HIERARCHY ---
+Ex 24.1 - Throwable hierarchy: Throwable -> [Error (Unrecoverable), Exception (Recoverable)]
+Ex 24.2 - Unchecked RuntimeException caught: ArithmeticException
+Ex 24.3 - Checked Exception caught: ClassNotFoundException
+Ex 24.4 - Multi-catch block captured: NumberFormatException
+Ex 24.5 - Specific FileNotFoundException caught before general IOException
+
+--- 25. TRY CATCH FINALLY FINALIZE ---
+Ex 25.1 - Execution order: Try Finally
+Ex 25.2 - Method with finally returned: 10
+Ex 25.3 - AutoCloseable closed automatically: true
+Ex 25.4 - Reverse close order (LIFO): [R2, R1]
+Ex 25.5 - Modern java.lang.ref.Cleaner replaced deprecated finalize()
+
+--- 26. COMPILE-TIME (CHECKED) VS RUN-TIME (UNCHECKED) EXCEPTIONS ---
+Ex 26.1 - Checked exception enforced by compiler: File access forbidden
+Ex 26.2 - Unchecked RuntimeException caught at runtime: NullPointerException
+Ex 26.3 - Wrapped checked exception into unchecked: UncheckedIOException
+Ex 26.4 - IllegalStateException standard usage: Order state is already COMPLETED
+Ex 26.5 - Rule: Checked for recoverable business scenarios; Unchecked for programming defects
+
+--- 27. CUSTOM EXCEPTIONS ---
+Ex 27.1 - Custom Checked Exception: Insufficient funds! Missing: $45.5 [Shortfall=45.5]
+Ex 27.2 - Custom Unchecked Exception: User not found with ID: 404
+Ex 27.3 - ApiErrorException: HTTP 401 - Invalid Bearer Token
+Ex 27.4 - Exception cause preserved: TimeoutException
+Ex 27.5 - Best practice: Base domain exception 'AppException' extended by specific subtypes
+
+--- 28. DESIGN PATTERNS (FACTORY, SINGLETON, BUILDER) ---
+Ex 28.1 - Factory Pattern created: SMS sent
+Ex 28.2 - Bill Pugh Singleton identical reference (s1 == s2): true
+Ex 28.3 - Enum Singleton: 'enum DatabaseConfig { INSTANCE; }' guarantees single instance
+Ex 28.4 - Builder Pattern: POST https://api.example.com/v1/users (Timeout: 60s)
+Ex 28.5 - Composite pattern: Factory returning pre-configured Builder presets
+
+--- 29. JVM MEMORY MANAGEMENT & GARBAGE COLLECTION ---
+Ex 29.1 - Heap Memory Pool: Max=8192MB, TotalAllocated=516MB, Free=492MB
+Ex 29.2 - Memory Regions: Stack [Depth=2 frames] | Heap [Dynamic objects] | Metaspace [Native class metadata]
+Ex 29.3 - Generational GC Simulator: Promoted to Tenured Old Gen=1
+Ex 29.4 - Memory Leak Prevention: WeakHashMap entry present before dereference: true
+Ex 29.5 - GC Tuning Flags: -Xms4g -Xmx4g -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseZGC (Sub-millisecond STW pause)
+
+--- 30. CONSTRUCTORS IN DETAILS ---
+Ex 30.1 - Parameterized constructor: Sarah (28)
+Ex 30.2 - Constructor chaining this(...): localhost:8080
+Ex 30.3 - super(...) invoked: id=501, sku=SKU-XYZ
+Ex 30.4 - Copy constructor clone: (10, 20)
+Ex 30.5 - Utility class with private constructor: isBlank('  ')=true
+
+--- 31. GENERICS ---
+Ex 31.1 - Generic Class Box<T>: Generic Type Safety
+Ex 31.2 - Generic Method: [1, 2, 3]
+Ex 31.3 - Upper Bounded <? extends Number> sum: 6.5
+Ex 31.4 - Lower Bounded <? super Integer> PECS: [100]
+Ex 31.5 - Type Erasure: Generics exist at compile-time for safety; bytecode uses Object / bounds
+
+--- 32. COLLECTIONS: LIST, SET, MAP ---
+Ex 32.1 - List (Interface contract) vs ArrayList (Dynamic array implementation): Decoupled Item
+Ex 32.2 - ArrayList (Fast O(1) Random Access) vs LinkedList (Fast O(1) Deque Add/Remove First/Last): size=6
+Ex 32.3 - HashSet (Hash table): 3 | LinkedHashSet: [Orange, Apple, Banana] | TreeSet (Red-Black): [Apple, Banana, Orange]
+Ex 32.4 - HashMap (Buckets): [Alpha, Gamma, Beta] | LinkedHashMap: [Alpha, Gamma, Beta] | TreeMap: [Alpha, Beta, Gamma]
+Ex 32.5 - ConcurrentHashMap (Thread-safe bucket CAS / synchronized lock): {node_1=HEALTHY, node_2=STANDBY}
+
+--- 33. FUNCTIONAL INTERFACES & LAMBDA ---
+Ex 33.1 - Custom @FunctionalInterface sum3(1, 2, 3): 6
+Ex 33.2 - Composed functional default method: HELLO
+Ex 33.3 - Expression Lambda square(4)=16, Block Lambda 5!=120
+Ex 33.4 - Method References: static=123, constructor=ArrayList
+Ex 33.5 - Lambda closed over effectively final variable: 50
+
+--- 34. PREDICATE, FUNCTION, CONSUMER, SUPPLIER ---
+Ex 34.1 - Predicate composition (6 is positive & even): true
+Ex 34.2 - Function chaining andThen: Length: 10
+Ex 34.3 - Consumer andThen executed: [Event_A, EVENT_A]
+Ex 34.4 - Supplier produced: 0.28483218272550603
+Ex 34.5 - Primitive IntPredicate isAdult(21): true
+
+--- 35. STREAM API ---
+Ex 35.1 - filter -> map -> toList: [ALICE, ANNA]
+Ex 35.2 - flatMap flattened: [10, 20, 30, 40, 50]
+Ex 35.3 - distinct -> sorted -> skip -> limit: [2, 3, 4]
+Ex 35.4 - reduce total sum: 100
+Ex 35.5 - Collectors.groupingBy length: {3=[Bob], 4=[Anna], 5=[Alice, David], 7=[Charlie]}
+Ex 35.5 - Collectors.partitioningBy start with A: [Alice, Anna]
+
+--- 36. OPTIONAL API ---
+Ex 36.1 - Optional creation: isPresent=true, isEmpty=true
+Ex 36.2 - orElse: 'Default Value' | orElseGet: 'Computed Default 2026-08-18T08:53:27.208659Z'
+Ex 36.3 - Optional.map length: 12
+Ex 36.4 - ifPresentOrElse output: [Found: Direct Value]
+Ex 36.5 - Optional.stream() in Stream pipeline: [Alpha, Beta]
+
+--- 37. SEALED CLASSES ---
+Ex 37.1 - Sealed hierarchy instances: Car, Truck
+Ex 37.2 - 'final class Car' terminates further inheritance
+Ex 37.3 - 'non-sealed class Motorcycle' re-opens subclassing to anyone
+Ex 37.4 - Exhaustive switch pattern matching without default: Passenger vehicle: Car
+Ex 37.5 - Sealed Result algebraic data type: Success[data=Operation Successful]
+
+--- 38. RECORDS ---
+Ex 38.1 - Record generated getters & toString: id=1001, email=dev@example.com | UserRecord[id=1001, email=dev@example.com]
+Ex 38.2 - Record compact constructor validated & normalized: Money[amount=99.5, currency=USD]
+Ex 38.3 - Custom Record method isEquator: true
+Ex 38.4 - Record value-based equality (u.equals(uCopy)): true
+Ex 38.5 - Record deconstructed in pattern matching: amt=500.0, cur=EUR
+
+--- 39. CONCURRENT COLLECTIONS & PRIORITY QUEUE ---
+Ex 39.1 - ConcurrentHashMap atomic merge: {java=2}
+Ex 39.2 - BlockingQueue taken: Msg-1
+Ex 39.3 - CopyOnWriteArraySet: [A, B, C]
+Ex 39.4 - PriorityQueue Min-Heap polled order: [10, 20, 30, 50]
+Ex 39.5 - PriorityQueue Max-Heap polled top: 50
+
+--- 40. STREAM VS PARALLEL STREAM ---
+Ex 40.1 - Sequential Stream sum: 1001000
+Ex 40.2 - Parallel Stream sum: 1001000
+Ex 40.3 - Parallel Stream safe collection count: 10
+Ex 40.4 - forEachOrdered preserves order: [1, 2, 3, 4, 5]
+Ex 40.5 - Parallel stream in custom ForkJoinPool: 500500
+
+--- 41. VIRTUAL THREADS (JAVA 21) ---
+Ex 41.1 - Thread.ofVirtual() started and joined: isVirtual=true
+Ex 41.2 - 10,000 Virtual Threads executed concurrently: completed=10000
+Ex 41.3 - newVirtualThreadPerTaskExecutor: Virtual Task Finished
+Ex 41.4 - Virtual Threads unmount from Carrier OS thread during I/O / sleep, achieving massive throughput
+Ex 41.5 - Virtual Thread created via ThreadFactory: worker-vt-1
+
+==================================================================
+🎉 ALL 41 TOPICS WITH RUNNABLE CODE EXAMPLES EXECUTED SUCCESSFULLY!
+==================================================================

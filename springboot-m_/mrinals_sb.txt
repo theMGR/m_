@@ -1,0 +1,47 @@
+Bean Lifecycle
+
+transactional
+
+Autowired vs constructor vs filed injection
+
+request vs get mapping
+
+request param vs path param
+
+@component service repository controller
+
+diff b/w spring and spring boot
+
+@springbbootapplication
+
+dependency injection vs IOC
+
+what is hybernet and jpa
+
+what is entity and dto
+
+globalexception
+
+how to create a rest API
+
+call out rest protocol (get,post,patch etc)
+
+diff b/w put and patch
+
+Transsaction lifecycle
+
+profiler
+
+n+1 Query problem
+
+@EnableAutoConfiguration vs @AutoConfiguration
+
+Spring Actuator
+
+Spring security
+
+interceptor context context holder
+
+Jwt/OAuth
+
+Spring MVC Flow

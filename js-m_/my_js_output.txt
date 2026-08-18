@@ -1,0 +1,317 @@
+================================================================
+🚀 JAVASCRIPT MASTER ARCHITECTURE & INTERVIEW GUIDE (33 TOPICS)
+================================================================
+
+--- 1. LET VS CONST VS VAR ---
+Ex 1.1 - var accessible outside block: var is function-wide
+Ex 1.1 - let blocked outside block: lScope is not defined
+Ex 1.2 - Re-declared var: 20 | Re-assigned let: 25
+Ex 1.3 - const object property mutation: { id: 101, name: 'Beta' }
+Ex 1.4 - var in loop closure (all share final value 3): [ 3, 3, 3 ]
+Ex 1.4 - let in loop closure (fresh binding per iteration): [ 0, 1, 2 ]
+Ex 1.5 - var creates global property on global scope: Tested in Node
+
+--- 2. UNDECLARED VS UNDEFINED VS NULL VS DEFINED ---
+Ex 2.1 - Undeclared access throws: ReferenceError - nonExistentVar is not defined
+Ex 2.2 - Variable unassigned: undefined
+Ex 2.2 - Parameter missing: undefined
+Ex 2.2 - Object property missing: undefined
+Ex 2.3 - Null value: null | typeof: object
+Ex 2.4 - null == undefined: true
+Ex 2.4 - null === undefined: false
+Ex 2.4 - null + 10: 10 | undefined + 10: NaN
+Ex 2.5 - OR (||) treats 0 as falsy -> fallback: 3000
+Ex 2.5 - Nullish (??) preserves 0 & '' -> correct: 0
+
+--- 3. GLOBAL, LOCAL, FUNCTIONAL, & LEXICAL SCOPE ---
+Ex 3.1 - Inside function: Can access global (GlobalApp) and local (AuthModule)
+Ex 3.1 - Outside function: moduleName is not accessible -> ReferenceError
+Ex 3.2 - Inner block sees outer: outer_val and inner: inner_val
+Ex 3.2 - Outer block cannot see inner block variable -> ReferenceError
+Ex 3.3 - Hello, Alice (Architect) from Lexical Scope!
+Ex 3.4 - Lexical lookup reads author-time location: GLOBAL_CONFIG
+Ex 3.5 - Shadowed variable inside function: Shadowed Local
+Ex 3.5 - Global variable remains untouched: Original Global
+
+--- 4. CLOSURE VS HOISTING ---
+Ex 4.1 - Function declaration hoisted: I am hoisted completely!
+Ex 4.1 - Var function expression hoisted only as undefined -> TypeError: expressionFunc is not a function
+Ex 4.2 - Private Balance via closure: 150
+Ex 4.2 - Direct property access undefined: undefined
+Ex 4.3 - Function Factory: double(5) = 10 | triple(5) = 15
+Ex 4.4 - Call 1: [COMPUTED] 25
+Ex 4.4 - Call 2: [CACHE_HIT] 25
+Ex 4.5 - Closure holds reference to outer heap array: payload
+
+--- 5. ARROW FUNCTIONS VS REGULAR FUNCTIONS ---
+Ex 5.1 - Regular func gets object context: Timer Widget
+Ex 5.1 - Arrow func gets lexical outer scope: undefined
+Ex 5.3 - new RegularConstructor(): 42
+Ex 5.3 - new ArrowConstructor() fails: TypeError: ArrowConstructor is not a constructor
+Ex 5.4 - Regular arguments object: [ 1, 2, 3 ]
+Ex 5.4 - Arrow rest parameters: [ 1, 2, 3 ]
+Ex 5.5 - Arrow func ignores .call(boundObj): undefined
+
+--- 6. MAP, FILTER, REDUCE ---
+Ex 6.1 - map() squared: [ 1, 4, 9, 16, 25, 36 ]
+Ex 6.2 - filter() evens: [ 2, 4, 6 ]
+Ex 6.3 - reduce() sum: 21
+Ex 6.4 - reduce() grouped by department: { Engineering: [ 'Alice', 'Charlie' ], HR: [ 'Bob' ] }
+Ex 6.5 - map implemented via reduce: [ 10, 20, 30, 40, 50, 60 ]
+
+--- 7. CALLBACK HELL & ASYNC EVOLUTION ---
+
+--- 8. PROMISES LIFECYCLE ---
+
+--- 9. PROMISE CREATION & ERROR HANDLING ---
+
+--- 10. PROMISE COMBINATORS ---
+
+--- 11. ASYNC / AWAIT MECHANICS ---
+
+--- 12. HIGHER-ORDER FUNCTIONS (HOF) ---
+Ex 12.1 - HOF passing function as arg (Sum): 30
+Ex 12.1 - HOF passing function as arg (Multiply): 200
+Ex 12.2 - [LOGGED] Invoked add with args [5,7] -> Output: 12
+Ex 12.3 - Function Composition compose(multiply10, add5)(2) = 70
+Ex 12.4 - Pipe pipeline: [SANITIZED: hello world]
+Ex 12.5 - HOF Negator isOdd(7): true
+
+--- 13. CALL STACK VS MICROTASK VS MACROTASK ---
+Ex 13.1 - [1. Sync] Call Stack Start
+Ex 13.1 - [2. Sync] Call Stack End
+Ex 13.4 - Priority: Synchronous Code > Microtasks (Promise/queueMicrotask) > Macrotasks (setTimeout/I/O)
+
+--- 14. EVENT LOOP & CONCURRENCY ---
+Ex 14.4 - True Multi-threading: Web Workers (Browser) and worker_threads (Node.js) run on separate OS threads without sharing memory
+
+--- 15. PROTOTYPAL INHERITANCE ---
+Ex 15.1 - Inherited method via prototype chain: Tesla is driving at 120 km/h
+Ex 15.2 - Dog speak (inherited): Buddy makes a sound
+Ex 15.2 - Dog bark (own prototype): Buddy barks!
+Ex 15.3 - ES6 Class inheritance: Pixel 8 powered on | OS: Android
+Ex 15.4 - Object.create(null) has no prototype: null
+Ex 15.5 - dog.hasOwnProperty('breed'): true
+Ex 15.5 - dog.hasOwnProperty('speak'): false
+Ex 15.5 - 'speak' in dog: true
+
+--- 16. THE 'THIS' KEYWORD & 4 BINDING RULES ---
+Ex 16.1 - Implicit Binding (accountUser.greet()): Hello, I am Marcus
+Ex 16.2 - Lost Binding (unboundGreet()): Hello, I am undefined
+Ex 16.3 - Explicit Binding with .call(): Hello, I am Elena
+Ex 16.4 - Hard Binding (.bind()): Hello, I am Elena
+Ex 16.5 - 'new' Binding creates fresh context: David
+
+--- 17. CALL, APPLY, AND BIND ---
+Ex 17.1 - .call(): Hi, I am Sarah!
+Ex 17.2 - .apply(): Greetings, I am Sarah.
+Ex 17.3 - .bind() invoked later: Welcome, I am Sarah!!!
+Ex 17.4 - Method borrowing with apply: 99
+Ex 17.5 - Partial Application via bind: 120
+
+--- 18. REST VS SPREAD OPERATOR ---
+Ex 18.1 - Rest operator gathers params into array: 120
+Ex 18.2 - Spread operator expands array: [ 0, 1, 2, 3, 4, 5 ]
+Ex 18.3 - Spread merges & overrides object properties: { theme: 'dark', fontSize: 16, showNotifications: true }
+Ex 18.4 - Rest in array destructuring: head = 10 | tail = [ 20, 30, 40 ]
+Ex 18.4 - Rest in object destructuring: extracted = { theme: 'dark', fontSize: 16 }
+Ex 18.5 - String spread: [
+  'J', 'a', 'v', 'a',
+  'S', 'c', 'r', 'i',
+  'p', 't'
+]
+
+--- 19. STRUCTURING AND DESTRUCTURING ---
+Ex 19.1 - Aliased & Default Destructuring: { id: 8841, username: 'johndoe', role: 'USER' }
+Ex 19.2 - Nested extracted city: San Francisco
+Ex 19.3 - Variable Swap via destructuring: primary = BLUE | secondary = RED
+Ex 19.4 - Skipping green: red = 255 | blue = 0
+Ex 19.5 - Function parameter destructuring: Header: Dashboard (800px, sticky: false)
+
+--- 20. SHALLOW COPY VS DEEP COPY ---
+Ex 20.1 - Shallow copy mutation affected original: true
+Ex 20.2 - structuredClone deep copy isolated: original = 60 | clone = 100
+Ex 20.3 - Cloned Set size: 3 | Original Set size: 2
+Ex 20.4 - JSON clone limitations (Date becomes string, nan becomes null): { date: '2026-08-18T08:53:31.773Z', nanVal: null }
+Ex 20.5 - Custom recursive deep clone verified: Cloud Infrastructure
+
+--- 21. DOM MANIPULATION ---
+Ex 21.1 - Selection with querySelector('.card'): { tagName: 'SECTION', id: 'user-profile', classList: 'card active' }
+Ex 21.2 - Appended elements count in Card: 2 | Header: Jane Developer
+Ex 21.3 - Batched Fragment Skills count: 4
+Ex 21.4 - classList operations: {
+  classes: 'card active highlighted dark-mode',
+  hasHighlight: true,
+  isNowDark: true
+}
+Ex 21.5 - dataset & style: {
+  dataset: { userId: 'usr_8832', role: 'admin' },
+  style: { backgroundColor: '#1e293b', color: '#f8fafc' }
+}
+
+--- 22. DOM VS BOM ---
+Ex 22.1 - DOM document properties: { title: 'JavaScript Concepts Portal', charset: 'UTF-8' }
+Ex 22.2 - BOM Location details: { pathname: '/learn/js', topicParam: 'dom', hash: '#overview' }
+Ex 22.3 - BOM Navigator device data: {
+  language: 'en-US',
+  isOnline: true,
+  cpuCores: 8,
+  platform: 'MacIntel'
+}
+Ex 22.4 - BOM localStorage cache loaded: { userId: 402, valid: true }
+Ex 22.5 - BOM History stack length: 3
+Ex 22.5 - History Back navigation URL: https://antigravity.dev/learn/js/closures
+
+--- 23. EVENT BUBBLING & CAPTURING ---
+Ex 23.1 - Event Bubbling execution flow: Button (Target) -> Card (Bubble) -> Body (Bubble)
+Ex 23.2 - Event Capturing execution flow: Body (Capture) -> Card (Capture)
+Ex 23.3 - stopPropagation() result: [ 'Button fired & stopped propagation' ]
+Ex 23.4 - stopImmediatePropagation() result: [ 'Listener 1 executed & stopped immediate' ]
+Ex 23.5 - Form submit preventDefault(): defaultPrevented = true | Allowed = false
+
+--- 24. EVENT DELEGATION ---
+Ex 24.1 - Delegated list clicks processed by 1 parent listener: [
+  'Clicked Item: Task 1 (ID: task_1)',
+  'Clicked Item: Task 3 (ID: task_3)'
+]
+Ex 24.2 - Action routing via closest(): [ { action: 'EDIT_ROW', rowId: 'row_101' } ]
+Ex 24.3 - Memory Scalability for 10k rows: {
+  delegatedListenersRequired: 1,
+  individualListenersRequired: 30000,
+  memorySaved: '99.99%'
+}
+Ex 24.4 - Action router output: [ 'Saved entity: doc_99' ]
+Ex 24.5 - SPA cleanup: listeners remaining on unmount: 1
+
+--- 25. THROTTLING ---
+Ex 25.1 - Throttle executed: Call 1
+Ex 25.2 - Scrolled to Y: 100
+Ex 25.3 - Order submitted once
+Ex 25.4 - Cursor at: { x: 10, y: 20 }
+Ex 25.5 - Timestamp throttle: Pass
+
+--- 26. DEBOUNCING ---
+Ex 26.5 - Immediate fire: First click runs immediately
+
+--- 27. CURRYING & PARTIAL APPLICATION ---
+Ex 27.1 - Curried sum(1)(2)(3): 6
+Ex 27.2 - [ERROR][AUTH] Token expired
+Ex 27.2 - [ERROR][AUTH] Invalid signature
+Ex 27.3 - Infinite currying sum(1)(2)(3)(4)(): 10
+Ex 27.4 - Generic curry (2)(3)(4): 24
+Ex 27.4 - Generic curry (2, 3)(4): 24
+Ex 27.5 - API Endpoint 1: https://api.example.com/v1/users
+Ex 27.5 - API Endpoint 2: https://api.example.com/v1/orders
+
+--- 28. TEMPORAL DEAD ZONE (TDZ) ---
+Ex 28.1 - TDZ let access error: ReferenceError
+Ex 28.2 - TDZ const access error: ReferenceError
+Ex 28.3 - typeof throws in TDZ: ReferenceError
+Ex 28.4 - Parameter TDZ (a depends on uninitialized b): ReferenceError
+Ex 28.5 - var has NO TDZ (returns undefined): undefined
+
+--- 29. EQUALITY: == VS === ---
+Ex 29.1 - 42 == '42': true
+Ex 29.1 - 42 === '42': false
+Ex 29.2 - null == undefined: true
+Ex 29.2 - null === undefined: false
+Ex 29.3 - 0 == false: true
+Ex 29.3 - '' == false: true
+Ex 29.3 - [] == false: true
+Ex 29.3 - [] === false: false
+Ex 29.4 - objA === objB (distinct memory addresses): false
+Ex 29.4 - objA === objC (same reference): true
+Ex 29.5 - NaN === NaN: false
+Ex 29.5 - Object.is(NaN, NaN): true
+Ex 29.5 - Object.is(+0, -0): false
+
+--- 30. SYNCHRONOUS VS ASYNCHRONOUS ---
+Ex 30.1 - [Sync] Line 1
+Ex 30.1 - [Sync] Line 2
+Ex 30.1 - [Sync] Line 3
+Ex 30.2 - [Sync] Before async timer
+Ex 30.2 - [Sync] After async timer (continues immediately)
+Ex 30.4 - [Async Function] Start
+Ex 30.5 - Sync array mapped: [ 2, 4, 6 ]
+
+--- 31. V8 ENGINE ARCHITECTURE ---
+Ex 31.1 - V8 AST Generated from source code: {"type":"VariableDeclaration","kind":"let","identifier":"sum","init":{"type":"BinaryExpression","operator":"+","left":{"type":"Identifier","name":"a"},"right":{"type":"Identifier","name":"b"}}}
+Ex 31.2 - V8 Ignition Bytecode: [ 'LdaNamedProperty [a]', 'Add [b]', 'Star [sum]' ] | Evaluated Result: 30
+Ex 31.3 - Call 1: { val: 3, state: 'Ignition Interpreted' }
+Ex 31.3 - Call 4 (Hot compiled): { val: 15, state: 'HOT: JIT Machine Code' }
+Ex 31.4 - Call with mutated shape: {
+  val: 'stringVal2',
+  state: 'DE-OPTIMIZED (Bailout to Ignition Bytecode)'
+}
+Ex 31.5 - Orinoco GC Old Generation objects promoted count: 1
+
+--- 32. SETINTERVAL VS SETTIMEOUT ---
+Ex 32.4 - Timer successfully cancelled with clearTimeout
+
+--- 33. FETCH API ---
+Ex 33.4 - AbortController signal aborted status: true
+Ex 8.3 - Settled immutability check: First Resolve Wins
+Ex 9.1 - Constructor resolved: Active
+Ex 9.2 - Promise.resolve: Instant success value
+Ex 9.2 - Promise.reject caught: Instant failure error
+Ex 9.4 - Result: Data Loaded
+Ex 9.5 - Handled via .then(success, error) 2nd arg: Bad Request
+Ex 11.1 - Async function returns Promise: 42
+Ex 11.3 - Caught in async/await try-catch: Async Network Exception
+Ex 11.3 - Async finally block executed
+Ex 11.5 - App initialized via Async IIFE
+Ex 13.1 - [3b. Microtask] Promise.then
+Ex 13.1 - [3. Microtask] queueMicrotask
+Ex 13.3 - Microtask 1
+Ex 14.5 - Interleaved: P1
+Ex 14.5 - Interleaved: P2
+Ex 30.3 - [Async Promise] Data loaded: { user: 'Alice' }
+Ex 30.4 - [Async Function] Resumed with: Yielded step
+Ex 33.2 - HTTP Error Status: 404 Not Found
+Ex 9.4 - finally cleanup: isSpinnerActive = false
+Ex 10.5 - Promise.any AggregateError caught: [ 'Err 1', 'Err 2' ]
+Ex 13.3 - Microtask 2
+Ex 30.5 - Async handler processed: [ 2, 4, 6 ]
+Ex 33.5 - Retry helper passed successfully
+Ex 8.4 - Value chained transformation: 25
+Ex 9.3 - Error intercepted in first catch: Network Timeout
+Ex 9.3 - Downstream recovered flow: Recovered default value
+Ex 33.1 - GET request result: { id: 1, title: 'Book' }
+Ex 33.3 - POST response: { success: true, received: { title: 'New Article', author: 'Dev' } }
+Ex 13.1 - [4. Macrotask] setTimeout
+Ex 14.3 - setTimeout(0) actual delay elapsed: 7ms
+Ex 7.5 - Parallel execution: { t1: 'Task 1', t2: 'Task 2', t3: 'Task 3' }
+Ex 13.2 - [Macrotask 1] Running
+Ex 13.2 - [Microtask inside Macrotask 1] Executed immediately after Macrotask 1
+Ex 13.2 - [Macrotask 2] Runs only after Microtasks are clear
+Ex 5.2 - Arrow in setTimeout preserves 'this': Timer Widget
+Ex 8.1 - State: FULFILLED, Value: SUCCESS_DATA
+Ex 8.2 - State: REJECTED, Reason: NETWORK_TIMEOUT
+Ex 10.3 - Promise.race winner: Fast (10ms)
+Ex 11.2 - Parallel await results: { res1: 'Parallel Result 1', res2: 'Parallel Result 2' }
+Ex 13.5 - Trampolined loop yielded to Event Loop
+Ex 14.1 - I/O Read [FileA] completed in 10ms
+Ex 14.2 - Chunked processing finished without UI lock
+Ex 10.1 - Promise.all failed fast with: Fail (15ms)
+Ex 10.2 - Promise.allSettled statuses: [ 'fulfilled', 'rejected' ]
+Ex 30.2 - [Async] Timer fired
+Ex 32.1 - setTimeout fired exactly once
+Ex 32.2 - setInterval tick #1
+Ex 32.3 - Nested setTimeout step #1
+Ex 32.5 - setTimeout with extra arguments: { arg1: 'Param A', arg2: 'Param B' }
+Ex 8.5 - Nested promise returned in chain: Auth with Initial Token
+Ex 7.1 - Callback Hell result: Step A -> Step B -> Step C
+Ex 7.3 - Clean Promise Chain: Promise Step 1 -> Promise Step 2 -> Promise Step 3
+Ex 7.4 - Clean Async/Await: Async Step 1 -> Async Step 2 -> Async Step 3
+Ex 11.4 - for...of sequential await: [ 'Processed item 1', 'Processed item 2', 'Processed item 3' ]
+Ex 26.2 - Search API called for: javascript
+Ex 26.3 - Auto-saved content: Draft v2 (Final)
+Ex 26.4 - Resize settled at: { w: 1024, h: 768 }
+Ex 32.2 - setInterval tick #2
+Ex 32.3 - Nested setTimeout step #2
+Ex 10.1 - Promise.all success: [ 'Fast (10ms)', 'Slow (30ms)' ]
+Ex 10.4 - Promise.any first fulfilled: Slow (30ms)
+
+================================================================
+🎉 ALL 33 JAVASCRIPT TOPICS WITH ARCHITECT NOTES LOADED & EXECUTED
+================================================================

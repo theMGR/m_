@@ -1,0 +1,160 @@
+==================================================================
+🚀 DATABASE & SQL/NOSQL MASTER ARCHITECTURE GUIDE (17 TOPICS)
+==================================================================
+
+
+--- 1. MYSQL (RDBMS) VS NOSQL ---
+Ex 1.1 - RDBMS (MySQL) Normalized Relational Row with Foreign Key: User 101 -> Order $250.0
+Ex 1.2 - Document NoSQL (MongoDB Hierarchical Embedded Document): {_id=obj_6619ef, name=Alice, addresses=[{city=New York, zip=10001}, {city=Austin, zip=73301}]}
+Ex 1.3 - Key-Value NoSQL (Redis Session Store): {user: 'Alice', role: 'ADMIN', ttl: 3600}
+Ex 1.4 - Scaling -> MySQL: Vertical (Read Replicas) | NoSQL: Horizontal Distributed Sharding
+Ex 1.4 - Schema -> MySQL: Fixed/Strict DDL | NoSQL: Schema-less / Dynamic JSON
+Ex 1.4 - Data Model -> MySQL: Relational Tables | NoSQL: Document, Key-Value, Columnar, Graph
+Ex 1.4 - Transactions -> MySQL: ACID (Immediate) | NoSQL: BASE (Eventual Consistency)
+Ex 1.5 - Polyglot Persistence: Use MySQL for payments, Redis for caching, MongoDB for product catalog, Cassandra for audit logs
+
+--- 2. DATABASE TRANSACTIONS ---
+  [BEGIN TRANSACTION] Snapshot captured: {ACC_A=1000.0, ACC_B=500.0}
+  [COMMIT] Funds transferred successfully!
+Ex 2.1 - Post-commit balances: {ACC_A=800.0, ACC_B=700.0}
+  [BEGIN TRANSACTION] Snapshot captured: {ACC_A=800.0, ACC_B=700.0}
+  [ROLLBACK] Reverted changes due to error: Power outage / Network failure before commit!
+Ex 2.1 - Post-rollback balances: {ACC_A=800.0, ACC_B=700.0}
+Ex 2.2 - SAVEPOINT partial rollback: [INSERT 1, INSERT 3]
+Ex 2.3 - SET autocommit = 0; prevents every single SQL statement from automatically committing independently
+Ex 2.4 - WAL (Redo Log): Engine writes changes to disk log sequentially BEFORE dirty pages are flushed to tablespace
+Ex 2.5 - Local DB Transactions rely on ACID; Distributed transactions across databases use Sagas or XA-2PC
+
+--- 3. ACID VS BASE ---
+Ex 3.1 - ACID Consistency Check: true
+Ex 3.2 - BASE Soft State (Replicas divergent during sync window): Consistent=false
+Ex 3.2 - BASE Eventual Consistency reached: Consistent=true (Replica=Value_V2)
+Ex 3.3 - Focus -> ACID: Data Accuracy & Financial Precision | BASE: High Availability & Low Latency
+Ex 3.3 - Schema -> ACID: Rigid relational schemas | BASE: Dynamic schema-less documents
+Ex 3.3 - Consistency -> ACID: Immediate / Linearizable | BASE: Eventual / Tunable Quorum
+Ex 3.3 - Transactions -> ACID: Heavyweight two-phase locking | BASE: Lightweight Saga / compensation
+Ex 3.4 - CAP Theorem: ACID databases are CP (Consistency + Partition Tolerance); BASE databases are AP (Availability + Partition Tolerance)
+Ex 3.5 - Tunable Consistency: Read/Write Quorum (W + R > N) turns an AP BASE database into a strongly consistent store
+
+--- 4. DATABASE INDEXING ---
+Ex 4.1 - B+Tree Leaf Doubly-Linked Range Scan: [Row_10, Row_20, Row_30, Row_40]
+Ex 4.2 - TABLE ACCESS FULL (SEQ SCAN): Scanned all 1000000 rows [O(N)]
+Ex 4.2 - INDEX SCAN: Found row in 3 page reads [O(log N)]
+Ex 4.3 - Hash Index O(1) exact match: Row_101 (Range scans impossible with Hash Index)
+Ex 4.4 - Composite Index (dept, salary, age): 'WHERE dept=5 AND salary>1000' uses index; 'WHERE salary>1000' CANNOT use index!
+Ex 4.5 - Covering Index: When all queried SELECT columns exist inside the B+Tree index itself, zero disk table lookup is required
+
+--- 5. DATABASE PARTITIONING ---
+  [Partition Pruning Active] Scanned ONLY: p_2026 (Skipped other 2 partitions)
+Ex 5.1 - Query for Year 2026 result: [Order_2026_01, Order_2026_02]
+Ex 5.2 - List Partition for 'DE': p_europe
+Ex 5.3 - Hash Partition target: HASH(88921) % 8 = Partition #1
+Ex 5.4 - Horizontal Partitioning: Splits rows into separate tables | Vertical Partitioning: Splits columns (BLOB/CLOB moved to separate table)
+Ex 5.5 - Data Archival: 'ALTER TABLE orders DROP PARTITION p_2020;' drops 100M rows instantly without generating massive Undo logs
+
+--- 6. DATABASE SHARDING ---
+Ex 6.1 - Fetched from Node #1: Profile Alpha
+Ex 6.1 - Fetched from Node #2: Profile Beta
+Ex 6.2 - Co-located Shard Key: Using 'customer_id' for both Customer and Order tables ensures orders reside on the SAME physical shard node
+Ex 6.3 - Hot Shard Fix: For high-traffic influencers, append random salt 'celebrity_id_0' to 'celebrity_id_9' to stripe traffic across shards
+Ex 6.4 - Directory Lookup: 'tenant_acme' mapped to shard_db_cluster_03
+Ex 6.5 - Partitioning = 1 Server / Multiple files | Sharding = Multiple Servers / Distributed Cluster
+
+--- 7. DIFFERENCE BETWEEN WHERE AND HAVING ---
+Ex 7.1 - WHERE (active = true) filtered out inactive Dave: count=4
+Ex 7.2 - GROUP BY department averages: {Engineering=115000.0, HR=60000.0, Marketing=90000.0}
+Ex 7.2 - HAVING AVG(salary) > 100,000 result: {Engineering=115000.0}
+Ex 7.3 - Invalid SQL: 'SELECT dept FROM emp WHERE AVG(salary) > 5000' fails because WHERE evaluates before aggregation occurs!
+Ex 7.4 - Standard Query: 'SELECT dept, AVG(salary) FROM emp WHERE active=1 GROUP BY dept HAVING AVG(salary) > 80000'
+Ex 7.5 - Performance Tip: Always filter out rows in WHERE clause early to reduce the volume of rows fed into GROUP BY memory
+
+--- 8. DELETE VS DROP VS TRUNCATE ---
+Ex 8.1 - DROP -> DDL | Destroys table structure + data + metadata completely from DB catalog
+Ex 8.1 - DELETE -> DML | Can use WHERE | Slow (Row-by-row Undo logs) | Rollbackable | Fires Triggers | Retains Auto-Increment
+Ex 8.1 - TRUNCATE -> DDL | No WHERE clause | Ultra-Fast (Page deallocation) | Resets Auto-Increment to 1 | No Triggers
+Ex 8.2 - DELETE with WHERE result: [Row_1, Row_3]
+Ex 8.3 - TRUNCATE wiped data & reset autoIncrement: size=0, nextId=1
+Ex 8.4 - DROP TABLE removed metadata definition from catalog: exists=false
+Ex 8.5 - Gotcha: TRUNCATE fails if the table is referenced by an active FOREIGN KEY constraint in another table
+
+--- 9. GROUP BY & CASE WHEN ---
+Ex 9.1 - GROUP BY category with SUM(amount): {Electronics=700.0, Books=80.0}
+Ex 9.2 - SQL CASE WHEN classification: {Electronics_500.0=HIGH_VALUE, Books_50.0=LOW_VALUE, Books_30.0=LOW_VALUE, Electronics_200.0=MEDIUM_VALUE}
+Ex 9.3 - Conditional Aggregation: SUM(CASE WHEN status='PAID' THEN amount ELSE 0 END) = $580.0
+Ex 9.4 - Simple CASE (CASE gender WHEN 'M' THEN 1 ...) vs Searched CASE (CASE WHEN age > 65 THEN 'Senior' ...)
+Ex 9.5 - MySQL ONLY_FULL_GROUP_BY error: Prevents selecting non-aggregated columns that are not part of the GROUP BY clause
+
+--- 10. AGGREGATE FUNCTIONS (MIN, MAX, COUNT, SUM, AVG) ---
+Ex 10.1 - COUNT(*) = 5 | COUNT(salary) [Ignores NULL] = 4
+Ex 10.2 - SUM(salary) = $340000.0 | AVG(salary) = $85000.0
+Ex 10.3 - MIN(salary) = $50000.0 | MAX(salary) = $120000.0
+Ex 10.4 - COUNT(DISTINCT dept) = 3 (Unique: [IT, HR, Sales])
+Ex 10.5 - B+Tree Index Optimization: 'SELECT MAX(id) FROM users' performs a single seek to the rightmost leaf node in O(1)
+
+--- 11. DATABASE NORMALIZATION ---
+Ex 11.1 - Un-normalized table contains duplicated deptHead: John Smith
+Ex 11.2 - Normalized: Changing deptHead requires updating exactly 1 row in Department table!
+Ex 11.3 - Updated Department Head to: Sarah Connor (Employees automatically reflect update)
+Ex 11.4 - Trade-off: Normalization optimizes for WRITES (Zero redundancy) | Denormalization optimizes for READS (Zero JOINs)
+Ex 11.5 - OLTP transactions use 3NF; Data Warehouses (Snowflake, BigQuery) denormalize into Star/Snowflake schemas
+
+--- 12. NORMAL FORMS (1NF, 2NF, 3NF, BCNF) ---
+Ex 12.1 - 1NF Enforces Atomic values across rows: [PhoneEntry1NF[userId=1, phoneNumber=111-222], PhoneEntry1NF[userId=1, phoneNumber=333-444]]
+Ex 12.2 - 2NF: Eliminated Partial Dependency by splitting CourseFee into dedicated Course table
+Ex 12.3 - 3NF: Eliminated Transitive Dependency (Non-key column DeptCity moved to Department table)
+Ex 12.4 - BCNF (Boyce-Codd): Enforces that in every functional dependency X -> Y, X must be a Candidate Key
+Ex 12.5 - 1NF: Atomic columns + Unique primary key
+Ex 12.5 - 2NF: 1NF + No Partial functional dependencies
+Ex 12.5 - 3NF: 2NF + No Transitive dependencies
+Ex 12.5 - BCNF: 3NF + Every determinant is a Candidate Key
+
+--- 13. LAZY LOADING VS EAGER LOADING ---
+Ex 13.1 - Eager Loading fetched Customer and Orders in 1 SQL JOIN: [ORD-1, ORD-2]
+Ex 13.2 - Lazy proxy instantiated (Zero initial SQL queries)
+  [Lazy Proxy Intercept] Fired SQL: SELECT * FROM orders WHERE customer_id = 101
+Ex 13.2 - Calling getOrders(): [ORD-101_A, ORD-101_B]
+Ex 13.3 - Caught: org.hibernate.LazyInitializationException: could not initialize proxy - no Session
+Ex 13.4 - @OneToMany / @ManyToMany -> Default is FetchType.LAZY (Safe)
+Ex 13.4 - @ManyToOne / @OneToOne -> Default is FetchType.EAGER (Dangerous! Must explicitly override to LAZY)
+Ex 13.5 - Solution: Keep all associations LAZY in entity model; use 'JOIN FETCH' dynamically in repository queries when needed
+
+--- 14. SQL JOINS ---
+Ex 14.1 - INNER JOIN (Only matching): [Alice -> Laptop, Alice -> Mouse, Bob -> Keyboard]
+Ex 14.2 - LEFT JOIN (Retains unmatched Charlie): [Alice -> Laptop, Alice -> Mouse, Bob -> Keyboard, Charlie -> NULL]
+Ex 14.3 - RIGHT JOIN (Retains orphan order Monitor): [Laptop -> User: Alice, Mouse -> User: Alice, Keyboard -> User: Bob, Monitor -> User: NULL]
+Ex 14.4 - SELF JOIN (Manager Hierarchy): [Dev Manager Bob reports to CEO Alex, Engineer Charlie reports to Dev Manager Bob]
+Ex 14.5 - DB Join Algorithms: Nested Loop (Index lookups), Hash Join (Large unsorted sets in memory), Merge Join (Pre-sorted indexes)
+
+--- 15. FIND 2ND HIGHEST SALARY ---
+Ex 15.1 - Approach 1 (MAX subquery): $95000.0
+Ex 15.2 - Approach 2 (DISTINCT ORDER BY DESC LIMIT 1 OFFSET 1): $95000.0
+Ex 15.3 - Approach 3 (DENSE_RANK window function handles ties): $95000.0
+Ex 15.4 - Generic N-th Highest Salary: 'SELECT DISTINCT salary FROM Employee ORDER BY salary DESC LIMIT 1 OFFSET (N-1)'
+Ex 15.5 - Return NULL when table has only 1 row: null
+
+--- 16. JOIN BETWEEN 3 TABLES ---
+Ex 16.1 - 3-Table JOIN executed successfully (3 items):
+  -> Customer: Alice Enterprise | Date: 2026-08-18 | Item: Cloud Server License ($1200.0)
+  -> Customer: Alice Enterprise | Date: 2026-08-18 | Item: SSL Certificate ($150.0)
+  -> Customer: Bob Corp | Date: 2026-08-19 | Item: Domain Name ($25.0)
+Ex 16.2 - EXPLAIN Plan: Database optimizer re-orders joins to start with the most selective table first
+Ex 16.3 - Indexing Rule: Always create B+Tree indexes on foreign key columns (orders.customer_id, order_items.order_id) to avoid full scans
+Ex 16.4 - Mixed Joins: 'FROM Customers c LEFT JOIN Orders o ON ... LEFT JOIN OrderItems oi ON ...' preserves customers with zero orders
+Ex 16.5 - Aggregation across joined tables: Total Revenue = $1375.0
+
+--- 17. OPTIMISTIC VS PESSIMISTIC LOCKING ---
+  [CONFLICT DETECTED] Row was updated by another thread! Expected version=1, Actual version=2
+Ex 17.1 - Optimistic User A Update (Success): true [New Version=2]
+Ex 17.1 - Optimistic User B Update (OptimisticLockException): false
+  [PESSIMISTIC_LOCK] Buyer 1 acquired lock and bought last item!
+Ex 17.2 - Pessimistic Lock prevented overselling: Buyer 2 succeeded = false
+Ex 17.3 - Performance -> Optimistic: High throughput (Zero lock wait) | Pessimistic: Blocks competing threads
+Ex 17.3 - Mechanism -> Optimistic: Version check on UPDATE | Pessimistic: DB row lock (SELECT FOR UPDATE)
+Ex 17.3 - Deadlock Risk -> Optimistic: Zero deadlock risk | Pessimistic: Risk of deadlocks if lock ordering differs
+Ex 17.3 - Best For -> Optimistic: Read-heavy / Low conflict | Pessimistic: Flash sales / Money deduction
+Ex 17.4 - Lock Modes: PESSIMISTIC_READ ('LOCK IN SHARE MODE') vs PESSIMISTIC_WRITE ('FOR UPDATE')
+Ex 17.5 - Spring Retry: Use @Retryable(retryFor = ObjectOptimisticLockingFailureException.class, maxAttempts = 3) to automatically retry optimistic updates
+
+==================================================================
+🎉 ALL 17 DATABASE TOPICS EXECUTED WITH 85+ RUNNABLE EXAMPLES!
+==================================================================

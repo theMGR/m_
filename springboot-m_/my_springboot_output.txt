@@ -1,0 +1,201 @@
+==================================================================
+🚀 SPRING BOOT MASTER ARCHITECTURE & INTERVIEW GUIDE (24 TOPICS)
+==================================================================
+
+
+--- 1. BEAN LIFECYCLE ---
+Ex 1.1 - Aware & InitializingBean phase: Bean [orderService] Init=true, Destroyed=false
+Ex 1.1 - DisposableBean phase: Bean [orderService] Init=true, Destroyed=true
+Ex 1.2 - BeanPostProcessor AOP Proxy wrapping: ProxyWrapped(OrderServiceBean)
+Ex 1.3 - BeanFactoryPostProcessor resolved property: jdbc:postgresql://localhost:5432/prod
+Ex 1.4 - Prototype scope returns unique instances (p1 != p2): true
+Ex 1.5 - Programmatic context contains: [paymentGateway]
+
+--- 2. @TRANSACTIONAL & TRANSACTION MANAGEMENT ---
+  [Tx-Manager] BEGIN TRANSACTION (Snapshot=1000.0)
+  [Tx-Manager] COMMIT TRANSACTION
+  [Tx-Manager] BEGIN TRANSACTION (Snapshot=800.0)
+  [Tx-Manager] ROLLBACK TRANSACTION due to: Network Timeout during transfer!
+Ex 2.1 - Post-rollback balance preserved: $800.0
+Ex 2.2 - rollbackFor=Exception.class guarantees rollback on checked exceptions: true
+Ex 2.3 - Self-invocation pitfall: calling this.innerTransactionalMethod() bypasses AOP interceptor
+Ex 2.4 - TransactionTemplate programmatic execution: Programmatic TX Executed
+Ex 2.5 - readOnly=true disables Hibernate dirty checking snapshot overhead & routes to Read Replica DB
+
+--- 3. AUTOWIRED VS CONSTRUCTOR VS FIELD INJECTION ---
+Ex 3.1 - Constructor Injection result: User from SQL
+Ex 3.2 - Setter Injection updated optional provider: TwilioService
+Ex 3.3 - Field injection requires reflection overhead: InjectedSecret
+Ex 3.4 - @Qualifier explicitly resolved: PayPal
+Ex 3.5 - Constructor injection provides immediate fail-fast validation: repo must not be null
+
+--- 4. @REQUESTMAPPING VS @GETMAPPING ---
+Ex 4.1 - @GetMapping matched route: true
+Ex 4.2 - Combined URI Route: /api/v1/users/{id}/settings
+Ex 4.3 - Content-Type validation: produces=application/json
+Ex 4.4 - Header condition routing active: true
+Ex 4.5 - Spring PathPatternParser (Spring Boot 3 default) is 2x faster than legacy AntPathMatcher
+
+--- 5. @REQUESTPARAM VS @PATHVARIABLE ---
+Ex 5.1 - @PathVariable extracted: {userId=105, bookId=BK-77}
+Ex 5.2 - @RequestParam with default value fallback: size=20
+Ex 5.3 - @Valid @RequestBody detected constraint violations: [Invalid email, Age must be at least 18]
+Ex 5.4 - @RequestHeader captured correlation ID: trace-xyz-9876
+Ex 5.5 - Standard: GET /users/42 (PathVariable) vs GET /users?role=ADMIN&page=0 (RequestParam)
+
+--- 6. @COMPONENT, @SERVICE, @REPOSITORY, @CONTROLLER, @RESTCONTROLLER ---
+Ex 6.1 - @Service is meta-annotated with @Component: true
+Ex 6.1 - @Repository is meta-annotated with @Component: true
+Ex 6.2 - @Repository exception translation: Spring DataAccessException: DataIntegrityViolationException
+Ex 6.3 - @RestController automatic JSON response body: {"status":"success","payload":"ProductList"}
+Ex 6.4 - Layered responsibilities: {@Controller / @RestController=Presentation / REST Endpoints, @Repository=Data Persistence & CRUD Operations, @Component=Utility, Helper, & Strategy Beans, @Service=Transaction & Business Logic}
+Ex 6.5 - @ComponentScan scans base package recursively for all @Component meta-annotated classes
+
+--- 7. SPRING VS SPRING BOOT ---
+Ex 7.1 - Dependencies -> Spring: Manual version alignment | Spring Boot: Starter POMs with BOM
+Ex 7.1 - Monitoring -> Spring: Custom build | Spring Boot: Built-in Spring Boot Actuator
+Ex 7.1 - Configuration -> Spring: Manual XML/Java Config | Spring Boot: Auto-Configuration
+Ex 7.1 - Deployment -> Spring: External WAR in Tomcat | Spring Boot: Embedded Server Executable JAR
+Ex 7.2 - spring-boot-starter-web automatically imports: [spring-web, spring-webmvc, tomcat-embed-core, jackson-databind]
+Ex 7.3 - Embedded Tomcat 10.1 initialized on port: 8080 (Zero external WAR install)
+Ex 7.4 - Fat JAR layout: BOOT-INF/classes, BOOT-INF/lib (all dependencies), org/springframework/boot/loader/JarLauncher
+Ex 7.5 - Opinionated Default: Adding H2 on classpath automatically configures in-memory DataSource & EntityManager
+
+--- 8. @SPRINGBOOTAPPLICATION ---
+Ex 8.1 - @SpringBootApplication bundles: @SpringBootConfiguration + @EnableAutoConfiguration + @ComponentScan
+Ex 8.2 - @ConditionalOnMissingBean retained original: HikariCP-Default-DataSource
+Ex 8.3 - @ConditionalOnProperty(name="app.cache.enabled", havingValue="true"): true
+Ex 8.4 - SpringApplication.run() bootstrap sequence: 5. Refresh ApplicationContext & AutoConfigurations
+Ex 8.5 - @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}) disables DB auto-config
+
+--- 9. DEPENDENCY INJECTION VS INVERSION OF CONTROL ---
+Ex 9.1 - Tightly coupled without IoC: Driving with V8 Roar
+Ex 9.2 - Decoupled with DI: Driving with Silent Electric
+Ex 9.3 - Mini IoC Container resolved bean: Driving with Silent Electric
+Ex 9.4 - BeanFactory: Lazy bean loading (low memory footprint) | ApplicationContext: Eager loading + AOP + Events + i18n
+Ex 9.5 - ApplicationContext Event Inversion: [Email sent to: dev@example.com]
+
+--- 10. HIBERNATE VS JPA ---
+Ex 10.1 - Architecture: JPA (javax.persistence / jakarta.persistence) = Interface Contract
+Ex 10.1 - Architecture: Hibernate (org.hibernate) = ORM Implementation Engine
+Ex 10.2 - Initial State: TRANSIENT
+Ex 10.2 - After em.persist(): PERSISTENT_MANAGED
+Ex 10.2 - After em.clear() / detach(): DETACHED
+Ex 10.3 - DB_QUERY_EXECUTED: User_Alice
+Ex 10.3 - L1_CACHE_HIT: User_Alice
+Ex 10.4 - Dirty Checking detected modification for automatic SQL UPDATE: true
+Ex 10.5 - JPQL: 'SELECT u FROM User u WHERE u.age > :age' operates on Java Entity Classes, NOT DB Tables
+
+--- 11. ENTITY VS DTO ---
+Ex 11.1 - Safe DTO excludes sensitive fields: UserResponseDTO[id=101, username=john_doe]
+Ex 11.2 - Mapper converted entity to DTO: UserResponseDTO[id=101, username=john_doe]
+Ex 11.3 - Spring Data Interface Projection (Optimized SELECT subset): alice_projection
+Ex 11.4 - JPQL DTO Query: 'SELECT new com.app.dto.UserDTO(u.id, u.name) FROM User u'
+Ex 11.5 - DTOs prevent @OneToMany infinite JSON recursion without needing @JsonManagedReference/@JsonBackReference
+
+--- 12. GLOBAL EXCEPTION HANDLING ---
+Ex 12.3 - @RestControllerAdvice structured 404 response: ErrorResponse[timestamp=2026-08-18T08:53:30.177983Z, status=404, error=Not Found, message=Product with ID 99 not found, path=/api/v1/products/99]
+Ex 12.4 - Spring Boot 3 / Spring 6 ProblemDetail (RFC 7807): {status=404, type=https://api.example.com/errors/not-found, detail=Order #501 does not exist, title=Resource Not Found}
+Ex 12.5 - Bean validation error aggregation: {email=Must be valid format, age=Must be >= 18}
+
+--- 13. HOW TO CREATE A REST API ---
+Ex 13.1 - POST /api/products: HTTP 201 Created -> Location: /api/products/1 | Body: ProductDTO[id=1, name=Gaming Laptop, price=1500.0]
+Ex 13.2 - GET /api/products/1: HTTP 200 OK -> Body: ProductDTO[id=1, name=Gaming Laptop, price=1500.0]
+Ex 13.3 - Layered separation guarantees separation of concerns and independent testability
+Ex 13.4 - Pagination support via Pageable & Page<T> in Spring Data JPA
+Ex 13.5 - HATEOAS links integration via RepresentationModelAssembler
+
+--- 14. REST PROTOCOLS & STATUS CODES ---
+Ex 14.1 - POST -> Safe=NO, Idempotent=NO  | Expected Status: 201 Created, 400 Bad Request
+Ex 14.1 - DELETE -> Safe=NO, Idempotent=YES| Expected Status: 204 No Content
+Ex 14.1 - GET -> Safe=YES, Idempotent=YES | Expected Status: 200 OK, 404 Not Found
+Ex 14.1 - PUT -> Safe=NO, Idempotent=YES | Expected Status: 200 OK, 204 No Content
+Ex 14.1 - PATCH -> Safe=NO, Idempotent=NO | Expected Status: 200 OK
+Ex 14.2 - 401 Unauthorized (Who are you?) vs 403 Forbidden (You cannot access this admin resource!)
+Ex 14.3 - 409 Conflict used for OptimisticLockingFailureException or duplicate email registration
+Ex 14.4 - 202 Accepted returned when task is accepted for async background execution via RabbitMQ/Kafka
+Ex 14.5 - Browser sends OPTIONS preflight to verify 'Access-Control-Allow-Methods: GET, POST, PUT, DELETE'
+
+--- 15. DIFFERENCE BETWEEN PUT AND PATCH ---
+Ex 15.1 - PUT (Full replacement): [name=Updated Name, email=updated@example.com, age=0]
+Ex 15.2 - PATCH (Partial update preserves untouched fields): [name=Original Name, email=new_email@example.com, age=30]
+Ex 15.3 - RFC 6902 JSON Patch operations: 2 ops defined
+Ex 15.4 - PUT is guaranteed idempotent. PATCH is usually idempotent, but incremental operations (op: increment) are non-idempotent
+Ex 15.5 - Best Practice in Spring: Use org.openapitools.jackson.nullable.JsonNullable to distinguish between explicit null vs omitted field
+
+--- 16. TRANSACTION PROPAGATION & ISOLATION ---
+Ex 16.1 - Propagation.NESTED -> Creates DB Savepoint within existing TX (partial rollback)
+Ex 16.1 - Propagation.NEVER -> Throws exception if called inside an active TX
+Ex 16.1 - Propagation.MANDATORY -> Throws IllegalTransactionStateException if no outer TX exists
+Ex 16.1 - Propagation.REQUIRES_NEW -> Suspends outer TX, creates completely independent inner TX
+Ex 16.1 - Propagation.REQUIRED (Default) -> Joins existing TX, or creates new one
+  [AuditLog REQUIRES_NEW] Committed audit independently: ORDER_ATTEMPT_FAILED
+Ex 16.2 - REQUIRES_NEW guarantees audit logging even when outer order creation rolls back
+Ex 16.3 - Anomalies: Dirty Read (Reads uncommitted data) | Non-Repeatable Read (Row re-read changes) | Phantom Read (New rows appear)
+Ex 16.4 - Isolation.READ_COMMITTED -> Prevents Dirty Read (Default in PostgreSQL, Oracle, SQL Server)
+Ex 16.4 - Isolation.SERIALIZABLE -> Prevents Dirty Read + Non-Repeatable Read + Phantom Read (Full locking)
+Ex 16.4 - Isolation.REPEATABLE_READ -> Prevents Dirty Read + Non-Repeatable Read (Default in MySQL)
+Ex 16.5 - TransactionSynchronizationManager binds DB Connection to current thread via ThreadLocal
+
+--- 17. SPRING PROFILES ---
+Ex 17.1 - Active Profile 'dev' URL: jdbc:h2:mem:devdb
+Ex 17.1 - Active Profile 'prod' URL: jdbc:postgresql://prod-db-cluster:5432/main
+Ex 17.2 - Property Override Hierarchy: 1. Command-line arguments (--server.port=9090)
+Ex 17.3 - Multi-document YAML separator '---' with 'spring.config.activate.on-profile: prod'
+Ex 17.4 - spring.profiles.default=default applies when no active profile is provided
+Ex 17.5 - @SpringBootTest + @ActiveProfiles("test") overrides production properties with MockBeans
+
+--- 18. N+1 QUERY PROBLEM ---
+Ex 18.1 - N+1 Problem: 1 Initial Query + 3 Subqueries executed = 4 total queries!
+Ex 18.2 - Solution 1 (JOIN FETCH): SELECT o, c FROM orders o INNER JOIN customers c ON o.customer_id = c.id; (Single JOIN Query)
+Ex 18.3 - Solution 2 (@EntityGraph): Dynamically applies SQL JOIN at repository method level
+Ex 18.4 - Solution 3 (@BatchSize): Combines subqueries using 'WHERE id IN (?, ?, ...)' reducing 100 queries to 4
+Ex 18.5 - Solution 4 (DTO Projection): 'SELECT new OrderSummaryDTO(o.id, c.name) FROM Order o JOIN o.customer c'
+
+--- 19. @ENABLEAUTOCONFIGURATION VS @AUTOCONFIGURATION ---
+Ex 19.1 - Spring Boot 2 auto-config file: [META-INF/spring.factories (EnableAutoConfiguration key)]
+Ex 19.1 - Spring Boot 3 auto-config file: [META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports]
+Ex 19.2 - Ordered AutoConfiguration pipeline: [1. DataSourceAutoConfiguration, 2. HibernateJpaAutoConfiguration, 3. TransactionAutoConfiguration]
+Ex 19.3 - Auto-configuration conditions evaluated during ApplicationContext refresh Phase
+Ex 19.4 - Custom Starter pattern: my-feature-spring-boot-starter (dependencies) + my-feature-spring-boot-autoconfigure (code)
+Ex 19.5 - Start app with '--debug' or check '/actuator/conditions' to view full auto-configuration evaluation report
+
+--- 20. SPRING ACTUATOR ---
+Ex 20.1 - Custom HealthIndicator /actuator/health output: {details={latencyMs=4, database=PostgreSQL}, status=UP}
+Ex 20.2 - Kubernetes Probes: {livenessProbe=/actuator/health/liveness (Checks if app is alive or needs container restart), readinessProbe=/actuator/health/readiness (Checks if app is ready to accept HTTP traffic)}
+Ex 20.3 - /actuator/metrics telemetry: {jvm.memory.used.mb=516, http.server.requests.count=2}
+Ex 20.4 - Exposure config: 'management.endpoints.web.exposure.include: health,metrics,prometheus'
+Ex 20.5 - /actuator/info output: {git.commit=a87fd1b, java.version=21, app.version=2.1.0}
+
+--- 21. SPRING SECURITY ---
+Ex 21.1 - PasswordEncoder matched: true (Hash=$2a$10$399d4c98_HASHED_SALT)
+Ex 21.2 - UserDetails loaded: admin, Authorities=[ROLE_ADMIN, ROLE_USER]
+Ex 21.3 - AuthenticationManager authenticated successfully: true
+Ex 21.4 - Modern Security 6: @Bean SecurityFilterChain filterChain(HttpSecurity http) with authorizeHttpRequests Lambda DSL
+Ex 21.5 - @EnableMethodSecurity enables SpEL expressions: @PreAuthorize("hasRole('ADMIN') and #userId == principal.id")
+
+--- 22. FILTER VS INTERCEPTOR VS SECURITYCONTEXT ---
+Ex 22.1 - Request Execution Pipeline: [1. Servlet Filter (Pre), 2. HandlerInterceptor.preHandle(), 3. Controller Method Executed, 4. HandlerInterceptor.postHandle(), 5. Servlet Filter (Post Response)]
+Ex 22.2 - SecurityContextHolder retrieved authenticated principal: authenticated_john
+Ex 22.3 - HandlerInterceptor preHandle authorized: true
+Ex 22.4 - OncePerRequestFilter prevents duplicate filter execution during internal forwards / async dispatches
+Ex 22.5 - Filter populates SLF4J MDC with 'traceId' and clears it in finally block to prevent ThreadLocal memory leaks
+
+--- 23. JWT VS OAUTH2 / OIDC ---
+Ex 23.1 - Generated Stateless JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyX2FsZXgiLCJyb2xlIjoiUk9MRV9BRE1JTiJ9.fe103889
+Ex 23.1 - Verified JWT Signature: true
+Ex 23.2 - Symmetric (HS256): Same shared secret for Auth & Resource Server | Asymmetric (RS256): Private key signs, Public key verifies (JWKS)
+Ex 23.3 - OAuth2 Authorization Code Flow with PKCE: 3. Client exchanges Code + code_verifier for Access Token & ID Token
+Ex 23.4 - OAuth2 Core Roles: {Client=Frontend App (React/Angular/Mobile), Authorization Server=Issues Tokens (Keycloak / Auth0 / Okta), Resource Owner=The End User, Resource Server=Spring Boot REST API protecting data}
+Ex 23.5 - Spring Boot Resource Server config: 'spring.security.oauth2.resourceserver.jwt.issuer-uri=https://auth.example.com'
+
+--- 24. SPRING MVC REQUEST FLOW ---
+Ex 24.1 - End-to-End Spring MVC Flow: FilterChain -> DispatcherServlet -> HandlerMapping (Found /api/orders) -> Interceptor.preHandle() -> HandlerAdapter -> OrderController.getOrder() -> HttpMessageConverter (Jackson JSON) -> 200 OK Response
+Ex 24.2 - HandlerMapping: Identifies WHICH controller handles request | HandlerAdapter: Handles HOW to invoke it
+Ex 24.3 - HttpMessageConverter payload serialization: {"type":"Object","timestamp":"2026-08-18T08:53:30.224016Z"}
+Ex 24.4 - ViewResolver resolves logical view name 'index' to '/templates/index.html' (Omitted in @RestController)
+Ex 24.5 - Spring MVC Async: Controller returns DeferredResult/CompletableFuture, freeing Tomcat thread during long operations
+
+==================================================================
+🎉 ALL 24 SPRING BOOT TOPICS EXECUTED WITH 100+ EXAMPLES!
+==================================================================

@@ -1,0 +1,62 @@
+let const var
+undeclared undefined null defined
+global scope, local scope, functional scope, lexical scope
+closure and hoisting
+map, filter, reducer
+callback hell
+async await
+promise - how many ways to create promise and home many ways handle error/exception
+high order function
+DOM BOM
+Object
+V8 engine
+event loop
+set interval vs set timeout
+fetch
+event bubbling and event capturing
+temporal dead zone (TDZ)
+== ===
+this
+spread operator rest operator
+array structing destructuring
+salo copy and deep copy
+call apply and bind
+throttling
+debouncing
+curring
+synchronous vs asynchronous
+
+
+DOM manuplation
+
+Map filter reducer
+
+call apply bind
+
+Event loop
+
+closer vs hostinger
+
+let vs const vs var
+
+Call Stack vs micro task
+
+Arrow Functions vs Regular Functions
+
+higher order function
+
+rest vs spread opreater
+
+Prototypal Inheritance
+
+Promises Lifecycle
+
+Async/Await Mechanics
+
+Promise Combinators
+
+Event Bubbling & Capturing
+
+Event Delegation
+
+shallow copy vs deep copy
